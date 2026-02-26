@@ -11,7 +11,8 @@
 <body>
     <!-- Navigation: Links to all portfolio pages -->
     <nav>
-        <ul>
+        <button class="hamburger" aria-label="Toggle menu">&#9776;</button>
+        <ul class="nav-links">
             <li><a href="index.html">Home</a></li>
             <li><a href="ai-evaluation.html">AI Evaluation</a></li>
             <li><a href="tufte-critique.html">Tufte Critique</a></li>
@@ -41,14 +42,14 @@
         <section id="about">
             <h2>About Me</h2>
             <!-- TODO: Replace this placeholder content with information about yourself -->
-            <p><strong>Who I am:</strong> [My name is Mary-Michael Dial. I am currently a senior, graduating in the fall of 2026. I am majoring in Digital Culture Data Analytics and minoring in Business. ]</p>
-            <p><strong>My interests:</strong> [I love spending time outdoors and being active. I like to hunt, surf, and run, but I also enjoy slower activites like reading. I enjoy the organization and technological insight DCDA provides. ]</p>
-            <p><strong>What I hope to learn:</strong> [I hope I can accurately curate a portfolio that reflects my interests and strenghts.]</p>
+            <p><strong>Who I am:</strong> My name is Mary-Michael Dial. I am currently a senior, graduating in the fall of 2026. I am majoring in Digital Culture Data Analytics and minoring in Business. </p>
+            <p><strong>My interests:</strong> I love spending time outdoors and being active. I like to hunt, surf, and run, but I also enjoy slower activites like reading. I enjoy the organization and technological insight DCDA provides. </p>
+            <p><strong>What I hope to learn:</strong> I hope I can accurately curate a portfolio that reflects my interests and strenghts.</p>
 
            
         
             <figure class="viz-container">
-                <img src="images/profile-photo.jpg" alt="Photo of Mary-Michael Dial">
+                <img src="images/mypic.png" alt="Photo of Mary-Michael Dial">
             </figure>
             
         </section>
@@ -120,5 +121,12 @@
         <p><a href="https://github.com/marymichaeldial/dcda-portfolio">View Repository on GitHub</a></p>
         <p>&copy; 2026 Mary-Michael Dial | DCDA 40833 | TCU</p>
     </footer>
+
+    <script>
+        document.querySelector('.hamburger').addEventListener('click', function () {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+    </script>
 </body>
+<script src="portfolio-animations.js"></script>
 </html>

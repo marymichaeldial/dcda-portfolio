@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=Lora:ital,wght@0,400;1,400&family=DM+Sans:wght@300;400;500&display=swap');
+/* I added this Google Fonts import to bring in editorial serif fonts.
 /* =========================
    DCDA 40833 Skills Portfolio Template
    CSS Stylesheet for Student Portfolios
@@ -6,14 +8,20 @@
 /* =========================
    CSS Variables (Color Scheme)
    ========================= */
-:root {
-    --primary-color: #0b375f;      /* TCU Purple */
-    --secondary-color: #c8ddf8;    /* Light Purple */
-    --accent-color: #ffd700;       /* Gold accent */
-    --text-color: #333;            /* Dark gray for text */
-    --text-secondary: #395173;     /* Lighter gray for captions */
-    --bg-color: #f4f4f4;           /* Light background */
-    --white: #ffffff;
+  :root {
+    --primary-color: #2c3e6b;      /* Navy blue — main headings & accents */
+    --secondary-color: #2c3e6b;    /* Softer dusty navy — cards & tags */
+    --accent-color: #5e534a;       /* Muted blue — replaces the orangey tan */
+--accent-soft: #e8eef4;        /* Cool light blue-white — replaces warm cream */
+    --text-color: #513f30;         /* Deep warm brown — body text */
+    --text-secondary: #513f30;     /* Muted warm gray — captions */
+    --bg-color: #eef1f5;           /* Cool blue-tinted white — less creamy */
+--bg-section: #f5f7fa;         /* Slightly blue-white for cards */
+--border-color: #8aabbf;;       /* Blue-gray border — replaces warm tan border */
+    --bg-dark: #8aabbf;            /* Warm dark brown — header & footer */
+    --font-display: 'Playfair Display', Georgia, serif;
+    --font-body: 'Lora', Georgia, serif;
+    --font-ui: 'DM Sans', sans-serif;
 }
 
 /* =========================
@@ -30,8 +38,8 @@ html {
 }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
-    line-height: 1.6;
+    font-family: var(--font-body);  /* Lora serif — editorial feel */
+    line-height: 1.8;               /* More open = magazine feel */
     color: var(--text-color);
     background-color: var(--bg-color);
 }
@@ -41,11 +49,28 @@ body {
    ========================= */
 /* Style semantic tags directly - no classes needed! */
 header {
-    background-color: var(--primary-color);
+    background-color: var(--bg-dark);    /* Deep warm brown */
     color: white;
-    padding: 2rem 0;
+    padding: 3.5rem 2rem 2.5rem;         /* More padding = luxurious feel */
     text-align: center;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+    font-family: var(--font-display);    /* Playfair Display serif */
+    color: var(--accent-soft);           /* Warm cream color */
+    margin: 0 0 0.5rem 0;
+    font-size: 2.8rem;
+    font-style: italic;                  /* Italic = classic editorial */
+}
+
+header p {
+    margin: 0;
+    opacity: 0.75;
+    font-size: 0.95rem;
+    font-family: var(--font-ui);         /* DM Sans — contrasts with serif */
+    letter-spacing: 0.15em;             /* Wide spacing = magazine byline */
+    text-transform: uppercase;          /* All caps subtitle */
+    color: var(--accent-color);
 }
 
 header h1 {
@@ -61,42 +86,67 @@ header p {
 }
 
 nav {
-    background-color: #5c5ee0;
-    padding: 0.75rem;
-    display: flex;              /* Make nav a flex container */
-    justify-content: center;    /* Center the ul inside nav */
-    position: sticky;           /* Stick to top when scrolling */
+    background-color: var(--bg-dark);    /* Deep brown matches header */
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    position: sticky;                    /* Sticks to top when scrolling */
     top: 0;
     z-index: 100;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 12px rgba(44, 31, 20, 0.25);
+    border-bottom: 1px solid rgba(196, 149, 106, 0.3); /* Subtle warm line */
 }
 
-/* Style the navigation list */
 nav ul {
-    list-style: none;           /* Remove bullets */
-    padding: 0;                 /* Remove default padding */
-    margin: 0;                  /* Remove default margin */
-    display: flex;              /* Arrange items horizontally */
-    flex-direction: row;        /* Explicit: horizontal on desktop */
-    justify-content: center;    /* Center the items */
-    gap: 1rem;                  /* Space between items */
-    flex-wrap: wrap;            /* Wrap on small screens */
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 0;                              /* No gap — cleaner editorial look */
+    flex-wrap: wrap;
 }
 
 nav li {
-    list-style: none;           /* Extra insurance - remove bullets */
+    list-style: none;
 }
 
 nav a {
-    color: white;
+    color: rgba(255, 255, 255, 0.75);   /* Slightly muted white */
     text-decoration: none;
-    padding: 0.5rem 1rem;
-    transition: background-color 0.3s ease;
-    border-radius: 4px;
+    padding: 0.85rem 1.25rem;
+    display: block;
+    font-family: var(--font-ui);        /* DM Sans for nav links */
+    font-size: 0.8rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;          /* All-caps = editorial style */
+    transition: color 0.2s ease, background-color 0.2s ease;
+    position: relative;                 /* Needed for the underline trick below */
+}
+
+/* This creates the animated underline on hover */
+/* ::after is a "fake" element we draw with CSS — no extra HTML needed */
+nav a::after {
+    content: '';                        /* Empty but required for pseudo-elements */
+    position: absolute;
+    bottom: 0;
+    left: 50%;                          /* Starts from the center */
+    right: 50%;                         /* Starts from the center */
+    height: 2px;
+    background-color: var(--accent-color);
+    transition: left 0.4s ease, right 0.4s ease;
+}
+
+/* On hover, left goes to 0 and right goes to 0 — line expands outward */
+nav a:hover::after {
+    left: 0;
+    right: 0;
 }
 
 nav a:hover {
-    background-color: var(--primary-color);
+    color: var(--accent-soft);
+    background-color: rgba(196, 149, 106, 0.1);
 }
 
 /* =========================
@@ -104,51 +154,71 @@ nav a:hover {
    ========================= */
 /* Style main semantic tag directly */
 main {
-    max-width: 900px;          /* Don't get too wide */
-    margin: 2rem auto;         /* Center horizontally */
-    padding: 0 1rem;           /* Space on sides for mobile */
+    max-width: 960px;
+    margin: 3rem auto;                  /* More breathing room above/below */
+    padding: 0 1.5rem;
 }
 
-/* All sections inside main get consistent styling */
 main section {
-    background-color: white;
-    padding: 2rem;
-    margin-bottom: 2rem;       /* Space between sections */
-    border-radius: 8px;        /* Rounded corners */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: var(--bg-section);
+    padding: 2.5rem;
+    margin-bottom: 2.5rem;
+    border-radius: 4px;                 /* Less round = more editorial */
+    box-shadow:
+        0 2px 4px rgba(92, 61, 46, 0.06),
+        0 8px 24px rgba(92, 61, 46, 0.08);  /* Warm shadow instead of cold gray */
+    border: 1px solid var(--border-color);
+    border-left: 3px solid var(--accent-color); /* Accent rule on left edge */
 }
 
-/* Style h2 headings inside sections */
 main section h2 {
+    font-family: var(--font-display);   /* Playfair Display for headlines */
     color: var(--primary-color);
-    border-bottom: 3px solid var(--secondary-color);
-    padding-bottom: 0.5rem;
-    margin-bottom: 1rem;
-    font-size: 1.875rem;
+    font-size: 2rem;
+    font-style: italic;                 /* Italic serif = editorial */
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.75rem;
+    position: relative;                 /* Needed for the ::after underline */
+}
+
+/* Animated gradient underline under every h2 */
+main section h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    width: 100%;
+    background: linear-gradient(90deg, var(--accent-color), transparent);
 }
 
 main section h3 {
-    color: var(--text-color);
-    margin-top: 1.5rem;
+    font-family: var(--font-display);
+    color: var(--primary-color);
+    margin-top: 1.75rem;
     margin-bottom: 0.75rem;
-    font-size: 1.5rem;
+    font-size: 1.35rem;
+    font-style: italic;
 }
 
-/* Paragraphs inside sections */
 main section p {
     margin-bottom: 1rem;
-    line-height: 1.8;
+    line-height: 1.9;
 }
 
-/* Lists inside sections */
 main section ul,
 main section ol {
-    margin: 1rem 0 1rem 2rem;
-    line-height: 1.8;
+    margin: 1rem 0 1rem 1.5rem;
+    line-height: 1.9;
 }
 
 main section li {
     margin-bottom: 0.5rem;
+}
+
+/* Warm tan bullet points instead of default black */
+main section ul li::marker {
+    color: var(--accent-color);
 }
 
 /* =========================
@@ -246,9 +316,19 @@ th, td {
 }
 
 th {
-    background: var(--primary-color);
-    color: white;
-    font-weight: 600;
+    background: var(--primary-color);   /* Warm brown header */
+    color: var(--accent-soft);          /* Cream text instead of white */
+    font-weight: 500;
+    font-family: var(--font-ui);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+}
+
+/* Add this new rule — warm hover on table rows */
+tr:hover td {
+    background: var(--accent-soft);
+    transition: background 0.2s ease;
 }
 
 tr:nth-child(even) {
@@ -280,21 +360,24 @@ tr:nth-child(even) {
    Framework Connections
    ========================= */
 .framework-callout {
-    background: linear-gradient(135deg, #f0e7f8, #e9d5ff);
-    border-left: 5px solid var(--secondary-color);
-    border-radius: 8px;
-    padding: 1.5rem;
+    background: linear-gradient(135deg, #f5ede0, #e8d5c0); /* Warm gradient */
+    border-left: 4px solid var(--accent-color);
+    border-radius: 4px;
+    padding: 1.5rem 1.75rem;
     margin: 2rem 0;
 }
 
 .framework-callout h3 {
     color: var(--primary-color);
     margin-top: 0;
+    font-family: var(--font-display);
+    font-style: italic;
 }
 
 .framework-callout strong {
-    color: var(--secondary-color);
+    color: var(--primary-color);
 }
+
 
 /* =========================
    Portfolio Cards
@@ -307,81 +390,228 @@ tr:nth-child(even) {
     margin: 2rem 0;
 }
 
-/* Individual portfolio card styling */
 .portfolio-card {
     display: block;
-    background: white;
-    border: 2px solid #e2e8f0;
-    border-radius: 12px;
-    padding: 1.5rem;
+    background: var(--bg-section);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    padding: 1.75rem;
     text-decoration: none;
     color: var(--text-color);
-    transition: all 0.3s ease;
-    position: relative;
+    transition:
+        transform 0.4s ease,         /* Controls the lift on hover */
+        box-shadow 0.4s ease,        /* Controls the shadow on hover */
+        border-color 0.2s ease;      /* Controls the border color change */
+    position: relative;              /* Needed for ::before and ::after */
+    overflow: hidden;                /* Clips the shine effect inside the card */
+}
+
+/* This creates a shine sweep effect when you hover — like a glossy magazine page */
+/* It's invisible by default, sitting off-screen to the left */
+.portfolio-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;                     /* Starts off-screen left */
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.35),   /* Semi-transparent white = shine */
+        transparent
+    );
+    transition: left 0.5s ease;
+    pointer-events: none;            /* So it doesn't block clicking */
+}
+
+/* On hover the shine sweeps across and off to the right */
+.portfolio-card:hover::before {
+    left: 150%;
+}
+
+/* This creates a tan bar that grows up from the bottom on hover */
+.portfolio-card::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: var(--accent-color);
+    transform: scaleY(0);            /* Hidden — squished to nothing */
+    transition: transform 0.4s ease;
+    transform-origin: bottom;        /* Grows upward from the bottom */
+}
+
+.portfolio-card:hover::after {
+    transform: scaleY(1);            /* Full height on hover */
 }
 
 .portfolio-card:hover {
-    border-color: var(--primary-color);
-    box-shadow: 0 8px 16px rgba(77, 25, 121, 0.15);
-    transform: translateY(-4px);
+    border-color: var(--accent-color);
+    box-shadow:
+        0 8px 24px rgba(92, 61, 46, 0.15),
+        0 2px 4px rgba(92, 61, 46, 0.08);
+    transform: translateY(-5px);     /* Lifts the card upward */
 }
 
 .portfolio-card h3 {
+    font-family: var(--font-display);
     color: var(--primary-color);
     margin: 0 0 0.5rem 0;
-    font-size: 1.25rem;
+    font-size: 1.2rem;
+    font-style: italic;
+    transition: color 0.2s ease;
+}
+
+/* Title turns tan when you hover the card */
+.portfolio-card:hover h3 {
+    color: var(--accent-color);
 }
 
 .portfolio-card p {
     color: var(--text-secondary);
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     margin: 0.75rem 0 0 0;
-    line-height: 1.5;
+    line-height: 1.6;
+    font-family: var(--font-ui);
 }
 
-/* Lab tag badge on portfolio cards */
 .lab-tag {
     display: inline-block;
-    background: var(--secondary-color);
+    background: var(--secondary-color);  /* Dusty blue from your palette inspo */
     color: white;
-    font-size: 0.75rem;
-    font-weight: 600;
-    padding: 0.25rem 0.5rem;
-    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: 500;
+    padding: 0.25rem 0.6rem;
+    border-radius: 2px;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.08em;
+    font-family: var(--font-ui);
 }
 
 /* =========================
    Footer (semantic tag)
    ========================= */
 footer {
-    background-color: #333;
-    color: white;
+    background-color: var(--bg-dark);   /* Matches header — bookends the page */
+    color: rgba(255, 255, 255, 0.65);
     text-align: center;
-    padding: 1.5rem;
-    margin-top: 2rem;
+    padding: 2rem;
+    margin-top: 3rem;
+    font-family: var(--font-ui);
+    font-size: 0.85rem;
+    letter-spacing: 0.06em;
+    border-top: 1px solid rgba(196, 149, 106, 0.25); /* Subtle warm line */
 }
 
 footer a {
-    color: var(--accent-color);
+    color: var(--accent-color);         /* Warm tan links */
     text-decoration: none;
+    transition: color 0.2s ease;
 }
 
 footer a:hover {
-    text-decoration: underline;
+    color: var(--accent-soft);          /* Lighter cream on hover */
+}
+
+/* =========================
+   Hamburger Menu
+   ========================= */
+.hamburger {
+    display: none;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.75rem;
+    cursor: pointer;
+    padding: 0.25rem 0.5rem;
+    line-height: 1;
+}
+
+.nav-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
 /* =========================
    Responsive Design (Mobile)
    ========================= */
 @media (max-width: 768px) {
+
+    /* Header shrinks down but keeps the editorial feel */
     header h1 {
-        font-size: 1.5rem;     /* Smaller on mobile */
+        font-size: 2rem;
     }
+
+    header p {
+        font-size: 0.8rem;
+        letter-spacing: 0.08em;     /* Slightly less spacing on small screens */
+    }
+
+    /* Nav stacks vertically on mobile */
+    nav ul {
+        flex-direction: column;
+        align-items: stretch;       /* Full width items = easier to tap */
+    }
+
+    nav a {
+        text-align: center;
+        /* Thin line between each nav item instead of the hover underline */
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    /* Less padding on mobile — more room for content */
+    main {
+        margin: 1.5rem auto;
+        padding: 0 1rem;
+    }
+
+    main section {
+        padding: 1.5rem 1.25rem;
+    }
+
+    main section h2 {
+        font-size: 1.6rem;          /* Smaller headline on small screens */
+    }
+
+    /* Single column grid on mobile */
+    .viz-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Turn off the slide-up animation on mobile */
+    /* Phones are slower — better to just show content immediately */
+    .reveal {
+        opacity: 1;
+        transform: none;
+    }
+}
 
     nav {
         font-size: 0.9rem;
+        flex-wrap: wrap;
+    }
+
+    .hamburger {
+        display: block;
+    }
+
+    .nav-links {
+        display: none;
+        width: 100%;
+    }
+
+    .nav-links.active {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 
     /* Stack navigation vertically on mobile */
@@ -403,18 +633,25 @@ footer a:hover {
     .viz-grid {
         grid-template-columns: 1fr;  /* Single column on mobile */
     }
-}
 
 /* =========================
    Print Styles (Optional)
    ========================= */
 @media print {
-    nav {
-        display: none;
+    nav { display: none; }
+
+    body {
+        background: white;
     }
 
     main section {
         box-shadow: none;
         page-break-inside: avoid;
+        border-left: 2px solid #ccc;
     }
 }
+
+    main section {
+        box-shadow: none;
+        page-break-inside: avoid;
+    }

@@ -9,9 +9,12 @@
 <body>
     <header>
         <nav>
-            <a href="index.html">Home</a>
-            <a href="lab02.html">Lab 2: AI Evaluation</a>
-            <a href="lab03.html" class="active">Lab 3: Visualization Critique</a>
+            <button class="hamburger" aria-label="Toggle menu">&#9776;</button>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="lab02.html">Lab 2: AI Evaluation</a>
+                <a href="lab03.html" class="active">Lab 3: Visualization Critique</a>
+            </div>
             <!-- Add more lab links as the semester progresses -->
         </nav>
         <h1>Visualization Critique</h1>
@@ -59,5 +62,11 @@ The work creates exciting and positive emotions, creating an inviting visualizat
     <footer>
         <p>© 2026 Your Name</p>
     </footer>
+
+    <script>
+        document.querySelector('.hamburger').addEventListener('click', function () {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+    </script>
 </body>
 </html>

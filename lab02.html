@@ -9,8 +9,11 @@
 <body>
     <header>
         <nav>
-            <a href="index.html">Home</a>
-            <a href="lab02.html" class="active">Lab 2: AI Evaluation</a>
+            <button class="hamburger" aria-label="Toggle menu">&#9776;</button>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="lab02.html" class="active">Lab 2: AI Evaluation</a>
+            </div>
         </nav>
         <h1>AI Tool Evaluation: Experimentation</h1>
     </header>
@@ -91,5 +94,11 @@ Using AI to pick apart personal behaviors raises important ethical questions and
     <footer>
         <p>&copy; 2026 Mary-Michael Dial | <a href="https://github.com/mary-michaeldial/dcda-portfolio">GitHub</a></p>
     </footer>
+
+    <script>
+        document.querySelector('.hamburger').addEventListener('click', function () {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+    </script>
 </body>
 </html>
