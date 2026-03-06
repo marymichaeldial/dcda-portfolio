@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab 05 — Vibe Coding | DCDA Portfolio</title>
+    <link rel="stylesheet" href="css/styles.css"> 
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=Lora:ital,wght@0,400;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        blockquote {
+            border-left: 3px solid var(--accent-color);
+            margin: 1.25rem 0;
+            padding: 1rem 1.5rem;
+            background-color: var(--bg-color);
+            font-family: var(--font-body);
+            font-style: italic;
+            color: var(--text-secondary);
+            border-radius: 0 4px 4px 0;
+        }
+
+        figure {
+            margin: 1.5rem 0;
+        }
+
+        figcaption {
+            font-family: var(--font-body);
+            font-style: italic;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            margin-top: 0.75rem;
+            text-align: center;
+        }
+
+        main section a {
+            color: var(--primary-color);
+            text-decoration: none;
+            border-bottom: 1px solid var(--border-color);
+            transition: color 0.2s ease, border-color 0.2s ease;
+        }
+
+        main section a:hover {
+            color: var(--accent-color);
+            border-bottom-color: var(--accent-color);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Mary Michael Dial</h1>
+        <p>DCDA 40833 — Skills Portfolio</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="#experiment-a">Experiment A</a></li>
+            <li><a href="#experiment-b">Experiment B</a></li>
+            <li><a href="#prompts">AI Prompts</a></li>
+            <li><a href="#reflection">Reflection</a></li>
+        </ul>
+    </nav>
+
+    <main>
+
+        <section id="experiment-a">
+            <h2>Experiment A — CSS Animations & Editorial Redesign</h2>
+            <p>I chose to first focus on Experiment A, to focus on the overall enhancement of my portfolio that reflects my style and goals. My first step was to find inspiration for the direction I wanted to go in. This included compiling fonts, photos, colors, animations, and transitions. I used a completely new color palette in my CSS, which included soft creams, navy blues, and brown. I then swapped the fonts and imported Google Fonts — Playfair Display and Lora — and a new italic serif for headings that makes my portfolio feel more professional.</p>
+            <p>Lastly, I changed the CSS animations with a page load, scroll triggered, and hover transitions. This was the most difficult and time consuming to learn how to do, but also the most impacting and rewarding. I used AI to assist me in the animations through the DOMContentLoaded section and the IntersectionObserver, which triggers the CSS transition. AI was most helpful in the IntersectionObserver. It poses a problem when the software can't understand the vision in my head for my portfolio, but that makes me strive to work harder in learning coding myself.</p>
+        
+        </section>
+
+        <section id="experiment-b">
+            <h2>Experiment B — Python Visualization: CITY Boots</h2>
+            <p>For Experiment B I created a Python visualization in Google Colab using a fake social media engagement dataset for CITY Boots (a brand I actually interned at the summer of 2025). I used the dates June 2025 through January 2026 to reflect the time I was working there, making the data feel personal and specific rather than generic. The dataset was generated using numpy and pandas across four platforms: Instagram, TikTok, Twitter, and YouTube. I used with columns for Likes, Comments, and Shares.</p>
+            <p>The code runs in three stages — building the data with a nested loop, grouping it with groupby then drawing both charts with matplotllib. Drawing the bars was the hardest part. I couldn't figure out that writing x - width, x, and x + width was how to avoid stacking them on top of each other. AI significantly sped up this process, specifically the syntax for grouped bar charts, but I would probably better comprehend the material if I couldn't use it as an aid.</p>
+
+            <figure>
+                <img src="CITYBoots-engagement.png"
+                     alt="CITY Boots Total Social Media Engagement grouped bar chart"
+                     style="max-width:100%; border-radius:4px; box-shadow: 0 4px 16px rgba(44,62,107,0.15);">
+                <figcaption>Chart 1 — Total engagement grouped by platform, June 2025–January 2026</figcaption>
+            </figure>
+
+            <figure>
+                <img src="CITYBoots-Monthlylikes.png"
+                     alt="CITY Boots Monthly Likes by Platform line chart"
+                     style="max-width:100%; border-radius:4px; box-shadow: 0 4px 16px rgba(44,62,107,0.15);">
+                <figcaption>Chart 2 — Monthly likes over time per platform, TikTok consistently outperforming others</figcaption>
+            </figure>
+
+        
+        </section>
+
+        <section id="reflection">
+            <h2>Critical Reflection</h2>
+
+            <h3>Process Evaluation and Ethical Considerations</h3>
+            <p>AI was most helpful for syntax I hadn't encountered before, specifically the IntersectionObserver. The JavaScript and grouped bar chart positioning in Python was also something I wasn't familiar with. Both have very specific structures that are hard to guess without prior experience. AI lacks the ability to create authentic and aesthtically specifc work that reflects my own creative vision. This poses as an ethical problem because it lacks individuality.</p>
+
+        </section>
+
+    </main>
+
+    <footer>
+        <p>Mary Michael Dial — DCDA 40833 Skills Portfolio |
+            <a href="https://github.com/marymichaeldial/dcda-portfolio" target="_blank">GitHub</a> |
+            <a href="https://marymichaeldial.github.io/dcda-portfolio/" target="_blank">Live Site</a>
+        </p>
+    </footer>
+
+    <script src="portfolio-animations.js"></script>
+
+</body>
+</html>

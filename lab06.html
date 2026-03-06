@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab 06 — Python Mapping | DCDA Portfolio</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=Lora:ital,wght@0,400;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        .map-embed {
+            width: 100%;
+            height: 550px;
+            border: none;
+            border-radius: 6px;
+            box-shadow: 0 4px 16px rgba(44,62,107,0.15);
+            margin: 1.5rem 0;
+        }
+
+        figure {
+            margin: 1.5rem 0;
+        }
+
+        figcaption {
+            font-family: var(--font-body);
+            font-style: italic;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            margin-top: 0.75rem;
+            text-align: center;
+        }
+
+        main section a {
+            color: var(--primary-color);
+            text-decoration: none;
+            border-bottom: 1px solid var(--border-color);
+            transition: color 0.2s ease, border-color 0.2s ease;
+        }
+
+        main section a:hover {
+            color: var(--accent-color);
+            border-bottom-color: var(--accent-color);
+        }
+
+        .palette {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+            margin: 1rem 0;
+        }
+
+        .swatch {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.4rem;
+            font-family: var(--font-body);
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        .swatch-color {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Mary Michael Dial</h1>
+        <p>DCDA 40833 — Skills Portfolio</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="#basemap">Custom Basemap</a></li>
+            <li><a href="#map">Interactive Map</a></li>
+            <li><a href="#reflection">Reflection</a></li>
+        </ul>
+    </nav>
+
+    <main>
+
+        <section id="basemap">
+            <h2>Part 1 — Custom Mapbox Basemap</h2>
+            <p>My basemap design was inspired by the album artwork of Sturgill Simpson's <em>A Sailor's Guide to Earth</em>. The cover features deep navy ocean tones, warm golden horizons, and an aged, nautical aesthetic that felt naturally suited to a map. I translated these visual elements into a color palette centered on dark navy water (<code>#0D1B2A</code>), aged parchment land (<code>#E8D5A3</code>), and warm cream roads.</p>
+
+            <div class="palette">
+                <div class="swatch">
+                    <div class="swatch-color" style="background:#0D1B2A;"></div>
+                    <span>#0D1B2A</span>
+                </div>
+                <div class="swatch">
+                    <div class="swatch-color" style="background:#1B3A5C;"></div>
+                    <span>#1B3A5C</span>
+                </div>
+                <div class="swatch">
+                    <div class="swatch-color" style="background:#E8D5A3;"></div>
+                    <span>#E8D5A3</span>
+                </div>
+                <div class="swatch">
+                    <div class="swatch-color" style="background:#D4B97A;"></div>
+                    <span>#D4B97A</span>
+                </div>
+                <div class="swatch">
+                    <div class="swatch-color" style="background:#C49A3C;"></div>
+                    <span>#C49A3C</span>
+                </div>
+                <div class="swatch">
+                    <div class="swatch-color" style="background:#7A9E7E;"></div>
+                    <span>#7A9E7E</span>
+                </div>
+            </div>
+
+            <p>Style URL: <code>mapbox://styles/marymichaeldial/cmmdto2ne001r01qv65ieb89o</code></p>
+        </section>
+
+        <section id="map">
+            <h2>Part 2 — Interactive Hometown Map</h2>
+            <p>The map below was generated using Python (Folium) and displays 10 personally meaningful locations in Tyler, Texas. Each marker is color-coded by location type — restaurants in red, parks in green, cultural sites in purple, and so on. Click any marker to see a description and image of the location.</p>
+
+            <figure>
+                <iframe class="map-embed" src="hometown_map.html" title="Interactive Hometown Map of Tyler, TX"></iframe>
+                <figcaption>Interactive map of Tyler, TX — 10 locations symbolized by category using a custom Mapbox basemap</figcaption>
+            </figure>
+        </section>
+
+        <section id="reflection">
+            <h2>Reflection</h2>
+
+            <h3>Design Inspiration</h3>
+            <p>I chose <em>A Sailor's Guide to Earth</em> by Sturgill Simpson as my design inspiration because the album's artwork captures something rare — a sense of vastness and intimacy at the same time. The deep navy of the ocean, the warm golden horizon, and the weathered, nautical textures all felt like they belonged on a map. I extracted the core colors directly from the cover and applied them systematically: dark water, parchment land, cream roads, and sage green for parks. The result feels cohesive and intentional rather than arbitrary.</p>
+
+            <h3>Cartographic Challenges</h3>
+            <p>The biggest challenge in Mapbox Studio was designing for multiple zoom levels. At a world scale, only the water and land colors matter — labels and roads are too small to read. As you zoom in, roads and place labels need to appear progressively. I had to think carefully about what should be visible at each level so the map didn't feel cluttered at high zoom or empty at low zoom. Hillshade was also tricky — too much opacity overwhelmed the parchment land color, so I kept it subtle.</p>
+
+            <h3>Technical Challenges</h3>
+            <p>Setting up the Python environment on a Mac was unexpectedly the hardest part — <code>pip</code> and <code>python</code> commands didn't work because the system uses <code>pip3</code> and <code>python3</code>. I also had to make sure the CSV and script were in the same folder before running. I used Claude (AI) extensively to generate the Python code, and while I didn't write it from scratch myself, I worked through it line by line to understand what each section does — reading the CSV, calling the Mapbox geocoding API, building the Folium map, and saving the HTML output.</p>
+
+        </section>
+
+    </main>
+
+    <footer>
+        <p>Mary Michael Dial — DCDA 40833 Skills Portfolio |
+            <a href="https://github.com/marymichaeldial/dcda-portfolio" target="_blank">GitHub</a> |
+            <a href="https://marymichaeldial.github.io/dcda-portfolio/" target="_blank">Live Site</a>
+        </p>
+    </footer>
+
+    <script src="portfolio-animations.js"></script>
+
+</body>
+</html>
