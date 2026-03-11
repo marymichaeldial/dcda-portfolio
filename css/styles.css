@@ -1,657 +1,1050 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=Lora:ital,wght@0,400;1,400&family=DM+Sans:wght@300;400;500&display=swap');
-/* I added this Google Fonts import to bring in editorial serif fonts.
-/* =========================
-   DCDA 40833 Skills Portfolio Template
-   CSS Stylesheet for Student Portfolios
-   ========================= */
+/* ============================================================
+   DCDA 40833 Skills Portfolio — css/styles.css
+   Author: Mary-Michael Dial | TCU | Spring 2026
 
-/* =========================
-   CSS Variables (Color Scheme)
-   ========================= */
-  :root {
-    --primary-color: #2c3e6b;      /* Navy blue — main headings & accents */
-    --secondary-color: #2c3e6b;    /* Softer dusty navy — cards & tags */
-    --accent-color: #5e534a;       /* Muted blue — replaces the orangey tan */
---accent-soft: #e8eef4;        /* Cool light blue-white — replaces warm cream */
-    --text-color: #513f30;         /* Deep warm brown — body text */
-    --text-secondary: #513f30;     /* Muted warm gray — captions */
-    --bg-color: #eef1f5;           /* Cool blue-tinted white — less creamy */
---bg-section: #f5f7fa;         /* Slightly blue-white for cards */
---border-color: #8aabbf;;       /* Blue-gray border — replaces warm tan border */
-    --bg-dark: #8aabbf;            /* Warm dark brown — header & footer */
-    --font-display: 'Playfair Display', Georgia, serif;
-    --font-body: 'Lora', Georgia, serif;
-    --font-ui: 'DM Sans', sans-serif;
+   This is the ONE stylesheet linked by every HTML page.
+   All colors, fonts, layout, and animations live here.
+
+   TABLE OF CONTENTS:
+     1.  Google Fonts Import
+     2.  CSS Variables (color palette + fonts)
+     3.  Reset & Base Styles
+     4.  Header / Hero Banner
+     5.  Navigation Bar
+     6.  Hamburger Menu (Mobile)
+     7.  Main Content & Sections
+     8.  About Grid (index.html)
+     9.  Portfolio Cards Grid
+    10.  Semester Reflection Grid
+    11.  Lab Page Hero Banner
+    12.  Lab Page Two-Column Layout
+    13.  Sidebar Cards
+    14.  Callout / Blockquote Boxes
+    15.  Images & Figures
+    16.  Code Blocks
+    17.  Embedded Content (iframes/maps)
+    18.  Footer
+    19.  Scroll Animations (.reveal)
+    20.  Responsive / Mobile (max-width: 768px)
+    21.  Print Styles
+   ============================================================ */
+
+
+/* ------------------------------------------------------------
+   1. GOOGLE FONTS IMPORT
+   Must be the very first rule in the file.
+   We load three typefaces:
+     Playfair Display — elegant serif for headings
+     Lora            — warm serif for body text
+     DM Sans         — clean sans-serif for nav and labels
+   ------------------------------------------------------------ */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap');
+
+
+/* ------------------------------------------------------------
+   2. CSS VARIABLES (Custom Properties)
+   Define the brand palette once here. Every color reference
+   below uses var(--name) so changing one value updates
+   every element that uses it instantly.
+   ------------------------------------------------------------ */
+:root {
+  /* Core palette */
+  --navy:         #2c3e6b;   /* Deep navy — headings, nav, dark elements */
+  --navy-mid:     #364e85;   /* Slightly lighter navy — hover states */
+  --brown:        #5e534a;   /* Warm brown — accent borders, tags */
+  --brown-light:  #7a6a5e;   /* Lighter brown — hover on brown elements */
+  --cream:        #f5f0e8;   /* Warm cream — main page background */
+  --cream-dark:   #ede6d8;   /* Slightly darker cream — card backgrounds */
+  --gold:         #c9a84c;   /* Gold — decorative lines and highlights */
+  --text-dark:    #2c2416;   /* Near-black — primary body text */
+  --text-mid:     #513f30;   /* Warm brown-gray — secondary text, captions */
+  --white:        #ffffff;
+
+  /* Legacy variable names — kept so older rules still work */
+  --primary-color:   #2c3e6b;
+  --accent-color:    #5e534a;
+  --accent-soft:     #f5f0e8;
+  --bg-color:        #f5f0e8;
+  --bg-section:      #ffffff;
+  --bg-dark:         #2c3e6b;
+  --text-color:      #2c2416;
+  --text-secondary:  #513f30;
+  --border-color:    rgba(94, 83, 74, 0.2);
+
+  /* Typography stacks */
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body:    'Lora', Georgia, serif;
+  --font-ui:      'DM Sans', Helvetica, Arial, sans-serif;
+
+  /* Spacing — multiples of 8px */
+  --space-sm:  1rem;    /* 16px */
+  --space-md:  2rem;    /* 32px */
+  --space-lg:  4rem;    /* 64px */
+
+  /* Layout */
+  --max-width:  960px;
+  --nav-height: 52px;
+  --transition: 0.25s ease;
 }
 
-/* =========================
-   Basic Reset & Typography
-   ========================= */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+
+/* ------------------------------------------------------------
+   3. RESET & BASE STYLES
+   Remove browser default margins/padding. box-sizing: border-box
+   means padding is INCLUDED in an element's declared width —
+   this prevents unexpected overflow and is standard practice.
+   ------------------------------------------------------------ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 html {
-    scroll-behavior: smooth;       /* Smooth scrolling for anchor links */
+  font-size: 16px;          /* 1rem = 16px throughout */
+  scroll-behavior: smooth;  /* Smooth scroll when clicking # anchor links */
 }
 
 body {
-    font-family: var(--font-body);  /* Lora serif — editorial feel */
-    line-height: 1.8;               /* More open = magazine feel */
-    color: var(--text-color);
-    background-color: var(--bg-color);
+  font-family: var(--font-body);
+  font-size: 1.0625rem;     /* 17px — slightly larger for readability */
+  line-height: 1.8;
+  color: var(--text-dark);
+  background-color: var(--cream);
+  /* Padding-top prevents content hiding behind the fixed nav */
+  padding-top: var(--nav-height);
 }
 
-/* =========================
-   Header & Navigation
-   ========================= */
-/* Style semantic tags directly - no classes needed! */
+img {
+  max-width: 100%;   /* Images never overflow their container */
+  height: auto;      /* Maintains aspect ratio */
+  display: block;
+}
+
+a {
+  color: var(--brown);
+  text-decoration: none;
+  transition: color var(--transition);
+}
+
+a:hover {
+  color: var(--brown-light);
+}
+
+h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 3.5vw, 2.1rem); /* clamp = scales with viewport */
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 1rem;
+}
+
+h3 {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  color: var(--brown);
+  margin: 1.4rem 0 0.6rem;
+}
+
+p {
+  margin-bottom: 1rem;
+  color: var(--text-mid);
+}
+
+figcaption {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: 0.875rem;
+  color: var(--text-mid);
+  margin-top: 0.5rem;
+  text-align: center;
+}
+
+/* Inline code — small monospace snippets inside paragraphs */
+code {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.85em;
+  background: var(--cream-dark);
+  padding: 2px 5px;
+  border-radius: 3px;
+  color: var(--navy);
+}
+
+
+/* ------------------------------------------------------------
+   4. HEADER / HERO BANNER
+   The large dark banner at the top of most pages.
+   Uses a diagonal gradient for depth.
+   The ::after pseudo-element adds the gold bottom line.
+   ------------------------------------------------------------ */
 header {
-    background-color: var(--bg-dark);    /* Deep warm brown */
-    color: white;
-    padding: 3.5rem 2rem 2.5rem;         /* More padding = luxurious feel */
-    text-align: center;
+  background-color: var(--navy);
+  background-image: linear-gradient(135deg, #1e2d52 0%, #2c3e6b 60%, #364e85 100%);
+  color: var(--cream);
+  padding: 4rem 2rem 3rem;
+  text-align: center;
+  position: relative;
+}
+
+/* Gold/brown gradient line at the bottom of the header */
+header::after {
+  content: '';
+  display: block;
+  height: 3px;
+  background: linear-gradient(90deg, var(--brown), var(--gold), var(--brown));
+  margin-top: 2.5rem;
+}
+
+/* Inner wrapper — limits the width of header text */
+.header-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+/* Small uppercase label above the main title */
+.header-eyebrow {
+  font-family: var(--font-ui);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: var(--space-sm);
 }
 
 header h1 {
-    font-family: var(--font-display);    /* Playfair Display serif */
-    color: var(--accent-soft);           /* Warm cream color */
-    margin: 0 0 0.5rem 0;
-    font-size: 2.8rem;
-    font-style: italic;                  /* Italic = classic editorial */
+  font-family: var(--font-display);
+  /* clamp(min, preferred, max) — font scales smoothly with viewport */
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-style: italic;
+  font-weight: 700;
+  color: var(--cream);
+  margin-bottom: 0.5rem;
 }
 
-header p {
-    margin: 0;
-    opacity: 0.75;
-    font-size: 0.95rem;
-    font-family: var(--font-ui);         /* DM Sans — contrasts with serif */
-    letter-spacing: 0.15em;             /* Wide spacing = magazine byline */
-    text-transform: uppercase;          /* All caps subtitle */
-    color: var(--accent-color);
+/* Subtitle / tagline below the name */
+.header-sub {
+  font-family: var(--font-ui);
+  font-size: 0.85rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(245, 240, 232, 0.7);
+  margin: 0;
 }
 
-header h1 {
-    color: white;
-    margin: 0 0 0.5rem 0;
-    font-size: 2rem;
-}
 
-header p {
-    margin: 0;
-    opacity: 0.9;
-    font-size: 1.1rem;
-}
-
+/* ------------------------------------------------------------
+   5. NAVIGATION BAR
+   position: sticky keeps it at the top while scrolling.
+   z-index: 100 ensures it sits above all page content.
+   Flexbox aligns the hamburger (left) and links (right/center).
+   ------------------------------------------------------------ */
 nav {
-    background-color: var(--bg-dark);    /* Deep brown matches header */
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    position: sticky;                    /* Sticks to top when scrolling */
-    top: 0;
-    z-index: 100;
-    box-shadow: 0 2px 12px rgba(44, 31, 20, 0.25);
-    border-bottom: 1px solid rgba(196, 149, 106, 0.3); /* Subtle warm line */
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: var(--navy);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 var(--space-md);
+  height: var(--nav-height);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.25);
+  /* Subtle warm line at the bottom of the nav */
+  border-bottom: 1px solid rgba(201, 168, 76, 0.2);
 }
 
-nav ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    gap: 0;                              /* No gap — cleaner editorial look */
-    flex-wrap: wrap;
+/* The list of nav links */
+nav ul,
+.nav-links {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0;
+  padding: 0;
+  margin: 0;
 }
 
 nav li {
-    list-style: none;
+  list-style: none;
 }
 
+/* Individual nav link */
 nav a {
-    color: rgba(255, 255, 255, 0.75);   /* Slightly muted white */
-    text-decoration: none;
-    padding: 0.85rem 1.25rem;
-    display: block;
-    font-family: var(--font-ui);        /* DM Sans for nav links */
-    font-size: 0.8rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;          /* All-caps = editorial style */
-    transition: color 0.2s ease, background-color 0.2s ease;
-    position: relative;                 /* Needed for the underline trick below */
+  color: rgba(245, 240, 232, 0.72);
+  text-decoration: none;
+  padding: 0.85rem 1.1rem;
+  display: block;
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transition: color var(--transition), background-color var(--transition);
+  position: relative; /* Required for the ::after underline animation */
 }
 
-/* This creates the animated underline on hover */
-/* ::after is a "fake" element we draw with CSS — no extra HTML needed */
+/* Animated underline — starts from center and expands outward on hover */
 nav a::after {
-    content: '';                        /* Empty but required for pseudo-elements */
-    position: absolute;
-    bottom: 0;
-    left: 50%;                          /* Starts from the center */
-    right: 50%;                         /* Starts from the center */
-    height: 2px;
-    background-color: var(--accent-color);
-    transition: left 0.4s ease, right 0.4s ease;
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  right: 50%;
+  height: 2px;
+  background-color: var(--gold);
+  transition: left 0.3s ease, right 0.3s ease;
 }
 
-/* On hover, left goes to 0 and right goes to 0 — line expands outward */
-nav a:hover::after {
-    left: 0;
-    right: 0;
+nav a:hover::after,
+nav a.active::after {
+  left: 0;
+  right: 0;
 }
 
-nav a:hover {
-    color: var(--accent-soft);
-    background-color: rgba(196, 149, 106, 0.1);
+nav a:hover,
+nav a.active {
+  color: var(--cream);
 }
 
-/* =========================
-   Main Content
-   ========================= */
-/* Style main semantic tag directly */
+
+/* ------------------------------------------------------------
+   6. HAMBURGER MENU (Mobile)
+   Hidden on desktop — shown on screens ≤ 768px via media query.
+   JavaScript toggles the 'active' class on .nav-links.
+   ------------------------------------------------------------ */
+.hamburger {
+  display: none; /* Hidden by default; shown in media query below */
+  background: none;
+  border: none;
+  color: var(--cream);
+  font-size: 1.6rem;
+  cursor: pointer;
+  padding: 0.25rem 0.75rem;
+  position: absolute;
+  right: var(--space-md);
+}
+
+
+/* ------------------------------------------------------------
+   7. MAIN CONTENT & SECTIONS
+   Centers content and gives each section a card-like appearance.
+   ------------------------------------------------------------ */
 main {
-    max-width: 960px;
-    margin: 3rem auto;                  /* More breathing room above/below */
-    padding: 0 1.5rem;
+  max-width: var(--max-width);
+  margin: var(--space-md) auto;
+  padding: 0 var(--space-sm);
 }
 
+/* Each <section> inside <main> gets a white card treatment */
 main section {
-    background-color: var(--bg-section);
-    padding: 2.5rem;
-    margin-bottom: 2.5rem;
-    border-radius: 4px;                 /* Less round = more editorial */
-    box-shadow:
-        0 2px 4px rgba(92, 61, 46, 0.06),
-        0 8px 24px rgba(92, 61, 46, 0.08);  /* Warm shadow instead of cold gray */
-    border: 1px solid var(--border-color);
-    border-left: 3px solid var(--accent-color); /* Accent rule on left edge */
+  background-color: var(--white);
+  padding: 2.5rem;
+  margin-bottom: var(--space-md);
+  border-radius: 4px;
+  border: 1px solid var(--border-color);
+  /* Left accent bar — visual rhythm connecting sections */
+  border-left: 3px solid var(--brown);
+  box-shadow:
+    0 2px 4px rgba(44, 31, 20, 0.05),
+    0 6px 20px rgba(44, 31, 20, 0.07);
 }
 
+/* Section title — centered, used on index.html */
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+  font-style: italic;
+  color: var(--navy);
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+/* Subtitle below a .section-title */
+.section-sub {
+  text-align: center;
+  font-family: var(--font-ui);
+  font-size: 0.9rem;
+  color: var(--text-mid);
+  margin-bottom: var(--space-md);
+}
+
+/* Gradient underline on h2 headings inside sections */
 main section h2 {
-    font-family: var(--font-display);   /* Playfair Display for headlines */
-    color: var(--primary-color);
-    font-size: 2rem;
-    font-style: italic;                 /* Italic serif = editorial */
-    margin-bottom: 1.25rem;
-    padding-bottom: 0.75rem;
-    position: relative;                 /* Needed for the ::after underline */
+  font-family: var(--font-display);
+  color: var(--navy);
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  font-style: italic;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.75rem;
+  position: relative;
 }
 
-/* Animated gradient underline under every h2 */
 main section h2::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    height: 2px;
-    width: 100%;
-    background: linear-gradient(90deg, var(--accent-color), transparent);
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  width: 100%;
+  /* Gradient fades from brown to transparent — editorial look */
+  background: linear-gradient(90deg, var(--brown), transparent);
 }
 
 main section h3 {
-    font-family: var(--font-display);
-    color: var(--primary-color);
-    margin-top: 1.75rem;
-    margin-bottom: 0.75rem;
-    font-size: 1.35rem;
-    font-style: italic;
+  font-family: var(--font-display);
+  color: var(--navy);
+  font-size: 1.2rem;
+  font-style: italic;
+  margin: 1.5rem 0 0.6rem;
 }
 
 main section p {
-    margin-bottom: 1rem;
-    line-height: 1.9;
+  line-height: 1.9;
+  margin-bottom: 1rem;
+  color: var(--text-mid);
 }
 
 main section ul,
 main section ol {
-    margin: 1rem 0 1rem 1.5rem;
-    line-height: 1.9;
+  margin: 1rem 0 1rem 1.5rem;
+  line-height: 1.9;
 }
 
 main section li {
-    margin-bottom: 0.5rem;
+  margin-bottom: 0.4rem;
 }
 
-/* Warm tan bullet points instead of default black */
+/* Custom bullet color — warm brown instead of default black */
 main section ul li::marker {
-    color: var(--accent-color);
-}
-
-/* =========================
-   Data Visualizations
-   ========================= */
-/* Container for charts and images */
-.viz-container {
-    margin: 2rem 0;
-    text-align: center;
-}
-
-.viz-container img {
-    max-width: 100%;           /* Responsive: never wider than container */
-    height: auto;              /* Maintain aspect ratio */
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    margin-bottom: 0.5rem;
-}
-
-/* Figure captions */
-.viz-container figcaption {
-    font-style: italic;
-    color: var(--text-secondary);
-    font-size: 0.9rem;
-    margin-top: 0.5rem;
-}
-
-/* Grid layout for multiple visualizations */
-.viz-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 1.5rem;
-    margin: 2rem 0;
-}
-
-/* =========================
-   Code Blocks
-   ========================= */
-/* Improve pre/code styling for Python code */
-pre {
-    background: #2d2d2d;          /* Dark background */
-    color: #f8f8f2;               /* Light text */
-    border: none;
-    border-radius: 8px;
-    padding: 1.5rem;
-    overflow-x: auto;
-    margin: 1.5rem 0;
-    font-size: 0.9rem;
-    line-height: 1.5;
-}
-
-code {
-    font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
-}
-
-/* Inline code (inside paragraphs) */
-p code, li code {
-    background: #f4f4f4;
-    color: #c7254e;
-    padding: 0.2rem 0.4rem;
-    border-radius: 3px;
-    font-size: 0.9em;
-}
-
-/* Code block titles */
-.code-title {
-    background: #1e1e1e;
-    color: #9cdcfe;
-    padding: 0.5rem 1rem;
-    border-radius: 8px 8px 0 0;
-    font-family: monospace;
-    font-size: 0.85rem;
-    margin-bottom: -0.5rem;
-}
-
-.code-title + pre {
-    border-radius: 0 0 8px 8px;
-    margin-top: 0;
-}
-
-/* =========================
-   Data Tables
-   ========================= */
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 1.5rem 0;
-    background: white;
-}
-
-th, td {
-    padding: 0.75rem 1rem;
-    text-align: left;
-    border: 1px solid #e2e8f0;
-}
-
-th {
-    background: var(--primary-color);   /* Warm brown header */
-    color: var(--accent-soft);          /* Cream text instead of white */
-    font-weight: 500;
-    font-family: var(--font-ui);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    font-size: 0.8rem;
-}
-
-/* Add this new rule — warm hover on table rows */
-tr:hover td {
-    background: var(--accent-soft);
-    transition: background 0.2s ease;
-}
-
-tr:nth-child(even) {
-    background: #f8f9fa;
-}
-
-.results-table {
-    font-size: 0.95rem;
-    margin: 1.5rem auto;
-    max-width: 700px;
-}
-
-.results-table td {
-    text-align: center;
-}
-
-.results-table td:first-child {
-    text-align: left;
-    font-weight: 500;
-}
-
-/* Highlight key rows */
-.results-table tr.highlight {
-    background: #fff3cd;
-    font-weight: bold;
-}
-
-/* =========================
-   Framework Connections
-   ========================= */
-.framework-callout {
-    background: linear-gradient(135deg, #f5ede0, #e8d5c0); /* Warm gradient */
-    border-left: 4px solid var(--accent-color);
-    border-radius: 4px;
-    padding: 1.5rem 1.75rem;
-    margin: 2rem 0;
-}
-
-.framework-callout h3 {
-    color: var(--primary-color);
-    margin-top: 0;
-    font-family: var(--font-display);
-    font-style: italic;
-}
-
-.framework-callout strong {
-    color: var(--primary-color);
+  color: var(--brown);
 }
 
 
-/* =========================
-   Portfolio Cards
-   ========================= */
-/* Grid layout for portfolio cards on home page */
+/* ------------------------------------------------------------
+   8. ABOUT GRID (index.html)
+   Two-column layout: intro text left, photo right.
+   CSS Grid handles the side-by-side layout.
+   Collapses to one column on mobile.
+   ------------------------------------------------------------ */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-md);
+  align-items: center;
+}
+
+.about-text h2 {
+  text-align: left;
+  font-style: italic;
+}
+
+/* The photo on the right of the about section */
+.about-photo img {
+  width: 100%;
+  border-radius: 4px;
+  border: 3px solid var(--cream-dark);
+  box-shadow: 0 4px 16px rgba(44, 31, 20, 0.12);
+}
+
+
+/* ------------------------------------------------------------
+   9. PORTFOLIO CARDS GRID (index.html)
+   CSS Grid auto-fills columns — minimum 280px each.
+   Cards lift and shine on hover via CSS transitions.
+   ------------------------------------------------------------ */
 .portfolio-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.5rem;
-    margin: 2rem 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin: var(--space-md) 0;
 }
 
 .portfolio-card {
-    display: block;
-    background: var(--bg-section);
-    border: 1px solid var(--border-color);
-    border-radius: 4px;
-    padding: 1.75rem;
-    text-decoration: none;
-    color: var(--text-color);
-    transition:
-        transform 0.4s ease,         /* Controls the lift on hover */
-        box-shadow 0.4s ease,        /* Controls the shadow on hover */
-        border-color 0.2s ease;      /* Controls the border color change */
-    position: relative;              /* Needed for ::before and ::after */
-    overflow: hidden;                /* Clips the shine effect inside the card */
+  display: block;
+  background: var(--white);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  padding: 1.75rem;
+  text-decoration: none;
+  color: var(--text-dark);
+  position: relative;
+  overflow: hidden; /* Clips the shine effect inside the card */
+  transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
 }
 
-/* This creates a shine sweep effect when you hover — like a glossy magazine page */
-/* It's invisible by default, sitting off-screen to the left */
+/* Shine sweep — an invisible highlight that slides across on hover */
 .portfolio-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;                     /* Starts off-screen left */
-    width: 60%;
-    height: 100%;
-    background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(255, 255, 255, 0.35),   /* Semi-transparent white = shine */
-        transparent
-    );
-    transition: left 0.5s ease;
-    pointer-events: none;            /* So it doesn't block clicking */
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%; /* Starts off-screen left */
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  transition: left 0.5s ease;
+  pointer-events: none; /* Clicks pass through this element */
 }
 
-/* On hover the shine sweeps across and off to the right */
 .portfolio-card:hover::before {
-    left: 150%;
+  left: 150%; /* Sweeps to off-screen right */
 }
 
-/* This creates a tan bar that grows up from the bottom on hover */
+/* Left accent bar that grows upward on hover */
 .portfolio-card::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    width: 3px;
-    background: var(--accent-color);
-    transform: scaleY(0);            /* Hidden — squished to nothing */
-    transition: transform 0.4s ease;
-    transform-origin: bottom;        /* Grows upward from the bottom */
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--gold);
+  transform: scaleY(0);        /* Squished to nothing by default */
+  transition: transform 0.3s ease;
+  transform-origin: bottom;   /* Grows up from the bottom */
 }
 
 .portfolio-card:hover::after {
-    transform: scaleY(1);            /* Full height on hover */
+  transform: scaleY(1); /* Full height on hover */
 }
 
 .portfolio-card:hover {
-    border-color: var(--accent-color);
-    box-shadow:
-        0 8px 24px rgba(92, 61, 46, 0.15),
-        0 2px 4px rgba(92, 61, 46, 0.08);
-    transform: translateY(-5px);     /* Lifts the card upward */
+  transform: translateY(-4px); /* Lifts card up */
+  border-color: var(--brown);
+  box-shadow: 0 8px 24px rgba(44, 31, 20, 0.13);
 }
 
 .portfolio-card h3 {
-    font-family: var(--font-display);
-    color: var(--primary-color);
-    margin: 0 0 0.5rem 0;
-    font-size: 1.2rem;
-    font-style: italic;
-    transition: color 0.2s ease;
+  font-family: var(--font-display);
+  color: var(--navy);
+  font-size: 1.15rem;
+  font-style: italic;
+  margin: 0.5rem 0 0.75rem;
+  transition: color var(--transition);
 }
 
-/* Title turns tan when you hover the card */
 .portfolio-card:hover h3 {
-    color: var(--accent-color);
+  color: var(--brown); /* Title warms on hover */
 }
 
 .portfolio-card p {
-    color: var(--text-secondary);
-    font-size: 0.9rem;
-    margin: 0.75rem 0 0 0;
-    line-height: 1.6;
-    font-family: var(--font-ui);
+  font-family: var(--font-ui);
+  font-size: 0.88rem;
+  line-height: 1.6;
+  color: var(--text-mid);
+  margin: 0 0 0.75rem;
 }
 
+/* Lab number badge — e.g. "Lab 2" */
 .lab-tag {
-    display: inline-block;
-    background: var(--secondary-color);  /* Dusty blue from your palette inspo */
-    color: white;
-    font-size: 0.7rem;
-    font-weight: 500;
-    padding: 0.25rem 0.6rem;
-    border-radius: 2px;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    font-family: var(--font-ui);
+  display: inline-block;
+  background: var(--navy);
+  color: var(--cream);
+  font-size: 0.68rem;
+  font-weight: 500;
+  padding: 0.2rem 0.6rem;
+  border-radius: 2px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-family: var(--font-ui);
+  margin-bottom: 0.4rem;
 }
 
-/* =========================
-   Footer (semantic tag)
-   ========================= */
+/* Skill tags below the card description */
+.card-skills {
+  display: block;
+  font-family: var(--font-ui);
+  font-size: 0.72rem;
+  color: var(--brown);
+  letter-spacing: 0.06em;
+  margin-top: 0.5rem;
+}
+
+
+/* ------------------------------------------------------------
+   10. SEMESTER REFLECTION GRID (index.html)
+   Two-column grid of reflection cards at the bottom of index.
+   ------------------------------------------------------------ */
+.reflection-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-md);
+  margin-top: var(--space-md);
+}
+
+/* Individual reflection card */
+.reflection-item {
+  background: var(--cream-dark);
+  border-radius: 4px;
+  padding: 1.5rem;
+  border-left: 3px solid var(--gold);
+}
+
+.reflection-item h3 {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-style: italic;
+  color: var(--navy);
+  margin: 0 0 0.6rem;
+}
+
+.reflection-item p {
+  font-size: 0.9rem;
+  line-height: 1.75;
+  margin: 0;
+}
+
+
+/* ------------------------------------------------------------
+   11. LAB PAGE HERO BANNER
+   Dark banner used at the top of lab02, lab05, lab06.
+   Contains breadcrumb, title, and metadata row.
+   ------------------------------------------------------------ */
+.lab-hero {
+  background: var(--navy);
+  background-image: linear-gradient(135deg, #1e2d52 0%, #2c3e6b 100%);
+  color: var(--cream);
+  padding: 3.5rem 2rem 2.5rem;
+  position: relative;
+}
+
+/* Gold gradient line at the bottom of the lab hero */
+.lab-hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--brown), var(--gold), var(--brown));
+}
+
+/* Breadcrumb: Home › Lab 2 */
+.breadcrumb {
+  font-family: var(--font-ui);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(245, 240, 232, 0.5);
+  margin-bottom: var(--space-sm);
+}
+
+.breadcrumb a {
+  color: rgba(245, 240, 232, 0.5);
+  transition: color var(--transition);
+}
+
+.breadcrumb a:hover { color: var(--gold); }
+.breadcrumb span { margin: 0 6px; }
+
+.lab-hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-style: italic;
+  line-height: 1.2;
+  color: var(--cream);
+  max-width: 800px;
+  margin-bottom: 1rem;
+}
+
+/* Row of metadata items below the title */
+.lab-meta {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+  margin-top: var(--space-sm);
+}
+
+.lab-meta-item {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Small uppercase label e.g. "TOOLS" */
+.meta-label {
+  font-family: var(--font-ui);
+  font-size: 0.62rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.meta-value {
+  font-size: 0.9rem;
+  color: rgba(245, 240, 232, 0.9);
+}
+
+
+/* ------------------------------------------------------------
+   12. LAB PAGE TWO-COLUMN LAYOUT
+   Main content left, sticky sidebar right.
+   Collapses to one column on mobile.
+   ------------------------------------------------------------ */
+.lab-content {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: var(--space-lg) var(--space-sm);
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  gap: var(--space-lg);
+  align-items: start;
+}
+
+/* The main prose column */
+.lab-main section {
+  padding: 0;
+  margin: 0 0 var(--space-md);
+  border: none;
+  border-left: none;
+  box-shadow: none;
+  background: none;
+}
+
+.lab-main h2 {
+  font-size: 1.4rem;
+  color: var(--navy);
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--cream-dark);
+  margin-bottom: 0.75rem;
+}
+
+.lab-main h2::after { display: none; } /* Remove gradient — use border instead */
+
+/* The sticky sidebar column */
+.lab-sidebar {
+  position: sticky;
+  top: calc(var(--nav-height) + 20px); /* Sticks 20px below the nav */
+}
+
+
+/* ------------------------------------------------------------
+   13. SIDEBAR CARDS
+   Dark navy cards used in the lab page sidebars.
+   ------------------------------------------------------------ */
+.sidebar-card {
+  background: var(--navy);
+  border-radius: 4px;
+  padding: 1.5rem;
+  color: var(--cream);
+  margin-bottom: var(--space-md);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Gold top stripe on each sidebar card */
+.sidebar-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--brown), var(--gold));
+}
+
+.sidebar-card h4 {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-style: italic;
+  color: var(--gold);
+  margin-bottom: 0.75rem;
+}
+
+/* Skills list with custom gold dash bullets */
+.skill-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.skill-list li {
+  font-family: var(--font-ui);
+  font-size: 0.83rem;
+  color: rgba(245, 240, 232, 0.85);
+  padding-left: 16px;
+  position: relative;
+}
+
+/* The gold dash that replaces the default bullet */
+.skill-list li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: var(--gold);
+  font-size: 0.72rem;
+}
+
+/* Button-style link used in sidebars */
+.sidebar-link {
+  display: block;
+  text-align: center;
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--navy);
+  background: var(--gold);
+  padding: 0.65rem var(--space-sm);
+  border-radius: 3px;
+  margin-top: 0.5rem;
+  transition: background var(--transition);
+}
+
+.sidebar-link:hover {
+  background: #d4b05a;
+  color: var(--navy);
+}
+
+
+/* ------------------------------------------------------------
+   14. CALLOUT / BLOCKQUOTE BOXES
+   Used to highlight key requirements, quotes, or takeaways.
+   ------------------------------------------------------------ */
+.callout,
+blockquote {
+  background: var(--cream-dark);
+  border-left: 4px solid var(--brown);
+  padding: 1rem 1.5rem;
+  margin: 1.5rem 0;
+  border-radius: 0 4px 4px 0;
+}
+
+.callout p,
+blockquote p {
+  font-style: italic;
+  color: var(--text-dark);
+  margin: 0;
+}
+
+
+/* ------------------------------------------------------------
+   15. IMAGES & FIGURES
+   ------------------------------------------------------------ */
+figure {
+  margin: 1.5rem 0;
+}
+
+/* Standard image inside a lab page */
+.lab-image {
+  width: 100%;
+  border-radius: 4px;
+  border: 1px solid var(--border-color);
+  margin-bottom: 0.5rem;
+}
+
+/* Centered image container */
+.viz-container {
+  text-align: center;
+  margin: 1.5rem 0;
+}
+
+.viz-container img {
+  max-width: 100%;
+  border-radius: 4px;
+  box-shadow: 0 4px 16px rgba(44, 31, 20, 0.1);
+}
+
+
+/* ------------------------------------------------------------
+   16. CODE BLOCKS
+   Dark-background pre blocks for Python and HTML snippets.
+   ------------------------------------------------------------ */
+pre {
+  background: #1e2533;        /* Very dark navy — code background */
+  color: #b0c8e8;             /* Muted light blue — code text */
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.88rem;
+  line-height: 1.6;
+  padding: 1.5rem;
+  border-radius: 4px;
+  overflow-x: auto;           /* Horizontal scroll if code is long */
+  margin: 1.5rem 0;
+}
+
+
+/* ------------------------------------------------------------
+   17. EMBEDDED CONTENT (iframes, maps)
+   Responsive container maintains aspect ratio.
+   padding-top as % = percentage of the element's WIDTH,
+   so a 62.5% value gives a 16:10 aspect ratio.
+   ------------------------------------------------------------ */
+.embed-wrapper {
+  position: relative;
+  width: 100%;
+  padding-top: 62.5%;         /* 16:10 ratio */
+  background: var(--cream-dark);
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+  margin: 1.5rem 0;
+}
+
+/* iframe fills the absolutely-positioned wrapper */
+.embed-wrapper iframe {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* Dashed placeholder when embed isn't available yet */
+.embed-placeholder {
+  background: var(--cream-dark);
+  border: 2px dashed rgba(94, 83, 74, 0.25);
+  border-radius: 4px;
+  padding: 3rem 2rem;
+  text-align: center;
+  color: var(--text-mid);
+  font-style: italic;
+  font-size: 0.9rem;
+  margin: 1.5rem 0;
+}
+
+
+/* ------------------------------------------------------------
+   18. FOOTER
+   Dark footer — bookends the page to match the header.
+   The gold gradient line is added by ::before.
+   ------------------------------------------------------------ */
 footer {
-    background-color: var(--bg-dark);   /* Matches header — bookends the page */
-    color: rgba(255, 255, 255, 0.65);
-    text-align: center;
-    padding: 2rem;
-    margin-top: 3rem;
-    font-family: var(--font-ui);
-    font-size: 0.85rem;
-    letter-spacing: 0.06em;
-    border-top: 1px solid rgba(196, 149, 106, 0.25); /* Subtle warm line */
+  background-color: var(--navy);
+  color: rgba(245, 240, 232, 0.5);
+  text-align: center;
+  padding: var(--space-md);
+  font-family: var(--font-ui);
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+  margin-top: var(--space-lg);
+}
+
+footer::before {
+  content: '';
+  display: block;
+  height: 3px;
+  background: linear-gradient(90deg, var(--brown), var(--gold), var(--brown));
+  margin-bottom: var(--space-md);
 }
 
 footer a {
-    color: var(--accent-color);         /* Warm tan links */
-    text-decoration: none;
-    transition: color 0.2s ease;
+  color: var(--gold);
 }
 
 footer a:hover {
-    color: var(--accent-soft);          /* Lighter cream on hover */
+  color: #d4b05a;
 }
 
-/* =========================
-   Hamburger Menu
-   ========================= */
-.hamburger {
-    display: none;
-    background: none;
-    border: none;
-    color: white;
-    font-size: 1.75rem;
-    cursor: pointer;
-    padding: 0.25rem 0.5rem;
-    line-height: 1;
+
+/* ------------------------------------------------------------
+   19. SCROLL ANIMATIONS (.reveal)
+   Elements with .reveal start invisible (opacity 0, shifted down).
+   portfolio-animations.js adds the 'visible' class when they
+   enter the viewport, triggering this CSS transition.
+   ------------------------------------------------------------ */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
-.nav-links {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 1rem;
-    list-style: none;
-    padding: 0;
-    margin: 0;
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
-/* =========================
-   Responsive Design (Mobile)
-   ========================= */
+/* Stagger delays so grouped items animate in sequence */
+.reveal:nth-child(2) { transition-delay: 0.1s; }
+.reveal:nth-child(3) { transition-delay: 0.2s; }
+.reveal:nth-child(4) { transition-delay: 0.3s; }
+.reveal:nth-child(5) { transition-delay: 0.4s; }
+
+
+/* ------------------------------------------------------------
+   20. RESPONSIVE / MOBILE (max-width: 768px)
+   At 768px and below: single column, hamburger menu visible.
+   ------------------------------------------------------------ */
 @media (max-width: 768px) {
 
-    /* Header shrinks down but keeps the editorial feel */
-    header h1 {
-        font-size: 2rem;
-    }
+  /* Show hamburger button on mobile */
+  .hamburger {
+    display: block;
+  }
 
-    header p {
-        font-size: 0.8rem;
-        letter-spacing: 0.08em;     /* Slightly less spacing on small screens */
-    }
+  /* Hide nav links by default on mobile */
+  nav ul,
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: var(--nav-height);
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    background: var(--navy);
+    padding: 0.5rem 0;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  }
 
-    /* Nav stacks vertically on mobile */
-    nav ul {
-        flex-direction: column;
-        align-items: stretch;       /* Full width items = easier to tap */
-    }
+  /* JS adds 'active' class — this makes the menu appear */
+  nav ul.active,
+  .nav-links.active {
+    display: flex;
+  }
 
-    nav a {
-        text-align: center;
-        /* Thin line between each nav item instead of the hover underline */
-        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    }
+  nav a {
+    text-align: center;
+    padding: 0.85rem var(--space-md);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
 
-    /* Less padding on mobile — more room for content */
-    main {
-        margin: 1.5rem auto;
-        padding: 0 1rem;
-    }
+  /* Stack about grid to one column */
+  .about-grid {
+    grid-template-columns: 1fr;
+  }
 
-    main section {
-        padding: 1.5rem 1.25rem;
-    }
+  /* Stack reflection grid to one column */
+  .reflection-grid {
+    grid-template-columns: 1fr;
+  }
 
-    main section h2 {
-        font-size: 1.6rem;          /* Smaller headline on small screens */
-    }
+  /* Stack lab content to one column */
+  .lab-content {
+    grid-template-columns: 1fr;
+  }
 
-    /* Single column grid on mobile */
-    .viz-grid {
-        grid-template-columns: 1fr;
-    }
+  /* Sidebar no longer sticky on mobile */
+  .lab-sidebar {
+    position: static;
+  }
 
-    /* Turn off the slide-up animation on mobile */
-    /* Phones are slower — better to just show content immediately */
-    .reveal {
-        opacity: 1;
-        transform: none;
-    }
-}
+  main section {
+    padding: 1.5rem 1.25rem;
+  }
 
-    nav {
-        font-size: 0.9rem;
-        flex-wrap: wrap;
-    }
+  header {
+    padding: 2.5rem 1.25rem 2rem;
+  }
 
-    .hamburger {
-        display: block;
-    }
+} /* END @media (max-width: 768px) */
 
-    .nav-links {
-        display: none;
-        width: 100%;
-    }
 
-    .nav-links.active {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    /* Stack navigation vertically on mobile */
-    nav ul {
-        flex-direction: column;  /* Change from row to column */
-        align-items: center;     /* Center the stacked items */
-    }
-
-    nav a {
-        display: block;          /* Full width for easier tapping */
-        width: 100%;
-        text-align: center;
-    }
-
-    main section {
-        padding: 1rem;         /* Less padding on mobile */
-    }
-
-    .viz-grid {
-        grid-template-columns: 1fr;  /* Single column on mobile */
-    }
-
-/* =========================
-   Print Styles (Optional)
-   ========================= */
+/* ------------------------------------------------------------
+   21. PRINT STYLES
+   Clean up the page for printing — remove nav, shadows, etc.
+   ------------------------------------------------------------ */
 @media print {
-    nav { display: none; }
+  nav,
+  footer,
+  .hamburger {
+    display: none;
+  }
 
-    body {
-        background: white;
-    }
+  body {
+    background: white;
+    color: black;
+    padding-top: 0;
+  }
 
-    main section {
-        box-shadow: none;
-        page-break-inside: avoid;
-        border-left: 2px solid #ccc;
-    }
-}
-
-    main section {
-        box-shadow: none;
-        page-break-inside: avoid;
-    }
+  main section {
+    box-shadow: none;
+    page-break-inside: avoid;
+    border-left: 2px solid #ccc;
+  }
+} /* END @media print */

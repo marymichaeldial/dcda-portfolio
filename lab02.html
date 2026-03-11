@@ -1,104 +1,412 @@
 <!DOCTYPE html>
+<!-- ============================================================
+     lab02.html — Lab 2: AI Tool Evaluation
+     Author: Mary-Michael Dial | DCDA 40833 | Spring 2026
+
+     This page is the full write-up for Lab 2, which involved
+     experimenting with ChatGPT and Canva Magic Studio using
+     unconventional prompts to probe assumptions and test limits.
+     ============================================================ -->
 <html lang="en">
+
 <head>
+    <!-- UTF-8 handles all special characters -->
     <meta charset="UTF-8">
+    <!-- Viewport makes the page scale correctly on phones -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Evaluation | Mary-Michael Dial</title>
+    <title>Lab 2 — AI Evaluation | Mary-Michael Dial</title>
+    <!-- Single external stylesheet controls all visual design -->
     <link rel="stylesheet" href="css/styles.css">
+    <!-- Google Fonts loaded here too in case CSS @import is slow -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lora:ital,wght@0,400;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 </head>
+
 <body>
-    <header>
-        <nav>
-            <button class="hamburger" aria-label="Toggle menu">&#9776;</button>
-            <div class="nav-links">
+
+    <!-- =====================================================
+         NAVIGATION BAR
+         Sticky — stays at top while scrolling.
+         Hamburger button hidden on desktop, shown on mobile.
+         nav-links div toggles 'active' class via JS below.
+         ===================================================== -->
+    <nav>
+        <button class="hamburger" aria-label="Toggle menu">&#9776;</button>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="lab02.html" class="active">Lab 2</a></li>
+            <li><a href="lab03.html">Lab 3</a></li>
+            <li><a href="lab04.html">Lab 4</a></li>
+            <li><a href="lab05.html">Lab 5</a></li>
+            <li><a href="lab06.html">Lab 6</a></li>
+        </ul>
+    </nav>
+
+    <!-- =====================================================
+         LAB HERO BANNER
+         Dark navy section with breadcrumb, title, and metadata.
+         Styled by .lab-hero in css/styles.css.
+         The gold line at the bottom is added by CSS ::after.
+         ===================================================== -->
+    <div class="lab-hero">
+        <div style="max-width:960px; margin:0 auto; padding:0 1rem;">
+
+            <!-- Breadcrumb shows where the user is in the site -->
+            <p class="breadcrumb">
                 <a href="index.html">Home</a>
-                <a href="lab02.html" class="active">Lab 2: AI Evaluation</a>
+                <span>›</span>
+                Lab 02
+            </p>
+
+            <!-- Lab title -->
+            <h1>Lab 2 — AI Tool Evaluation:<br>Experimentation</h1>
+
+            <!-- Metadata row: course, tools, skills -->
+            <div class="lab-meta">
+                <div class="lab-meta-item">
+                    <span class="meta-label">Course</span>
+                    <span class="meta-value">DCDA 40833</span>
+                </div>
+                <div class="lab-meta-item">
+                    <span class="meta-label">Tools</span>
+                    <span class="meta-value">ChatGPT · Canva Magic Studio</span>
+                </div>
+                <div class="lab-meta-item">
+                    <span class="meta-label">Skills</span>
+                    <span class="meta-value">Critical Analysis · AI Ethics · HTML</span>
+                </div>
             </div>
-        </nav>
-        <h1>AI Tool Evaluation: Experimentation</h1>
-    </header>
+        </div>
+    </div>
+    <!-- END LAB HERO -->
 
-    <main>
-        <section>
-            <h2>Introduction</h2>
-            <p>
-                For this lab, I experimented with two different AI tools by asking thought provoking and interesting questions. I explored ChatGPT (text/chat assistant) and Canva Magic Studio (presentation and design). My goal was not to produce outputs I would normally favor, but to probe the assumptions built into these tools and push them beyond their typical uses. This project was intended to observe where they succeeded, failed, or revealed hidden constraints. I intentionally used unconventional and creatively misaligned prompts to better understand how these systems can shape digital usage.
-            </p>
-        </section>
 
-        <section>
-            <h2>Tool 1: ChatGPT (Text / Chat Assistant)</h2>
-            <h3>What I Tried</h3>
-            <p>
-                I experimented with ChatGPT by giving it prompts that were deliberately ambiguous or subjective, such as asking it to analyze “vibes” in contemporary digital culture or to explain a concept without relying on standard academic language. I asked ChatGpt these two questions: "Tell me things about myself that I may not know based off of all of our conversations before." and "If I were self-sabotaging without realizing it, how might I be doing that?"
-            </p>
-<figure>
-  <img src="images/Lab02-1.png" width="300">  
+    <!-- =====================================================
+         TWO-COLUMN LAYOUT
+         .lab-content is a CSS Grid: main content left, sidebar right.
+         Defined in css/styles.css under "Lab Page Two-Column Layout".
+         Collapses to one column on mobile.
+         ===================================================== -->
+   <div style="max-width:960px; margin:2rem auto; padding:0 1rem; display:grid; grid-template-columns:1fr 260px; gap:3rem; align-items:start;">
 
-    <figcaption>I feel that asking AI to pick apart my behaviors and critique my self-awareness is a bit unsettling, but it's also fascinating to see what it picks up on. Using AI reveals hidden opinions and patterns from my own subconscious.</figcaption>
-</figure>
+        <!-- -----------------------------------------------
+             MAIN CONTENT COLUMN
+             ----------------------------------------------- -->
+        <main class="lab-main">
 
-            <h3>What Happened</h3>
-            <p>
-                ChatGPT performed well when generating structured explanations and reflective commentary, even from loosely defined prompts. It was especially effective at adopting an analytical tone and producing coherent narratives quickly. However, it struggled with maintaining internal consistency when prompts became contradictory. In some cases, it confidently generated plausible-sounding responses that were overly generalized, revealing a tendency to prioritize fluency over precision.
-            </p>
-  <img src="images/Lab02-2.png" width="300"> 
-   
-    <figcaption>I was surprised by how much ChatGPT knew about me, even though I had never explicitly told it about my personal life. It seemed to be able to make inferences from the conversation history that I hadn't even realized I had shared.</figcaption>
-            <h3>What I Learned</h3>
-            <p>
-                These experiments revealed that ChatGPT assumes users want clarity, structure, and resolution, even when uncertainty might be more appropriate. The tool tends to “smooth over” ambiguity rather than sit with it. This highlights a key limitation: while ChatGPT is useful for brainstorming and drafting, it may obscure uncertainty or disagreement if used uncritically.
-            </p>
+            <!-- ----------------------------------------
+                 SECTION: Lab Requirements
+                 A synopsis of what the lab asked us to do.
+                 ---------------------------------------- -->
+            <section>
+                <h2>Lab Requirements</h2>
+                <!-- This callout box summarizes the assignment briefly -->
+                <div class="callout">
+                    <p>
+                        Experiment with at least two AI tools using unconventional or
+                        creatively misaligned prompts. Observe where tools succeed, fail,
+                        or reveal hidden assumptions. Reflect on ethical implications.
+                        Present findings as a structured HTML page.
+                    </p>
+                </div>
+                <p>
+                    The goal was not to use these tools in the way they were designed —
+                    but to push them sideways and see what broke. I chose ChatGPT and
+                    Canva Magic Studio because they represent two very different kinds
+                    of AI output: text and visual design.
+                </p>
+            </section>
 
-            <h3>Ethical Considerations</h3>
-            <p>
-Using AI to pick apart personal behaviors raises important ethical questions and concerncs. I do not share every aspect of my life with AI, so this information is heavily inaccurate and should not be relied on. 
-            </p>
-        </section>
 
-        <section>
-            <h2>Tool 2: Canva Magic Studio (Presentation & Design)</h2>
-            <h3>What I Tried</h3>
-            <p>
-                With Canva Magic Studio, I attempted to generate presentation slides for abstract or unconventional topics. My topic included "Design a presentation for a concept that doesn't exist yet."
-            </p>
+            <!-- ----------------------------------------
+                 SECTION: Introduction
+                 ---------------------------------------- -->
+            <section>
+                <h2>Introduction</h2>
+                <p>
+                    For this lab, I experimented with two different AI tools by asking
+                    thought-provoking and intentionally unusual questions. I explored
+                    <strong>ChatGPT</strong> (text/chat assistant) and
+                    <strong>Canva Magic Studio</strong> (presentation and design).
+                    My goal was not to produce outputs I would normally favor, but to
+                    probe the assumptions built into these tools and push them beyond
+                    their typical uses.
+                </p>
+                <p>
+                    This project was intended to observe where they succeeded, failed,
+                    or revealed hidden constraints. I intentionally used unconventional
+                    and creatively misaligned prompts to better understand how these
+                    systems shape digital usage — and what it means to be a critical
+                    consumer of AI.
+                </p>
+            </section>
 
-  <img src="images/Lab02-3.png" width="300">
- 
-    <figcaption>This shows the output of Canva Magic Studio when I asked it to generate a presentation for a concept that doesn't exist yet.</figcaption>
-            <h3>What Happened</h3>
-            <p>
-                Canva Magic Studio quickly produced visually polished images and layouts that were consistent with my vague and imaginative prompt. with consistent typography and color schemes. However, the content itself lacked depth and relied on sshort buzzwords and guess-work to create a lenghty presentation. 
-            </p>
 
-            <h3>What I Learned</h3>
-            <p>
-               Canva is best used for creating presnetations and infrographics when given clear and very specific instructions. It lacks the ability to create authentic and new ideas without heavily inputting information. The visuals, color scheme, and layout were pleasing though.
-            <h3>Ethical Considerations</h3>
-            <p>
-           
-                <img src="images/lab02-4.png" width="300">
-    <figcaption>It was interesting to see how Canva Magic Studio generated an idealized world. I wouldn't have expected this promopt to create a dystopian society.</figcaption>
-                Canva raises questions about authorship and originality, especially when AI-generated designs are presented as personal work. I believe there are implications for transparency in academic and professional contexts when using Canva because of its' lack of statements around human or AI based content.
-            </p>
-        </section>
+            <!-- ----------------------------------------
+                 SECTION: Tool 1 — ChatGPT
+                 ---------------------------------------- -->
+            <section>
+                <h2>Tool 1: ChatGPT (Text / Chat Assistant)</h2>
 
-        <section>
-            <h2>Broader Reflections</h2>
-            <p>
-                Through these experiments, I saw many insightful strengths and limitations of AI tools. It was interesting to see the feedback ChatGPt could present me on my subconscious behaviors, but I also beileve its notable to mention the lack of accuracy and depth in responses (that is not accounted for). Canva Magic Studio developed interesting and creative visuals to create an easy and flowing presentation. But without adding in. extremely clear instructions and insight into what the goal of the presenation was, it lacked insgihtful depth. Canva poses a major ethical conc
-            </p>
-        </section>
-    </main>
+                <h3>What I Tried</h3>
+                <p>
+                    I experimented with ChatGPT by giving it prompts that were deliberately
+                    ambiguous or subjective. I asked it these two specific questions:
+                </p>
 
+                <!-- blockquote visually sets off the actual prompts I used -->
+                <blockquote>
+                    <p>"Tell me things about myself that I may not know based off of all of our conversations before."</p>
+                </blockquote>
+                <blockquote>
+                    <p>"If I were self-sabotaging without realizing it, how might I be doing that?"</p>
+                </blockquote>
+
+                <!-- figure wraps image + caption together as one semantic unit -->
+                <figure>
+                    <!-- Image saved in images/ folder — Lab02-1.png -->
+                    <img src="images/Lab02-1.png"
+                         alt="Screenshot of ChatGPT response to personal introspection prompt"
+                         class="lab-image">
+                    <figcaption>
+                        Asking AI to pick apart my behaviors is unsettling but fascinating.
+                        It reveals patterns from my own subconscious I hadn't articulated.
+                    </figcaption>
+                </figure>
+
+                <h3>What Happened</h3>
+                <p>
+                    ChatGPT performed well when generating structured explanations and
+                    reflective commentary, even from loosely defined prompts. It was
+                    especially effective at adopting an analytical tone and producing
+                    coherent narratives quickly. However, it struggled with maintaining
+                    internal consistency when prompts became contradictory. In some cases,
+                    it confidently generated plausible-sounding responses that were overly
+                    generalized — revealing a tendency to prioritize fluency over precision.
+                </p>
+
+                <!-- Second screenshot — wrapped in figure for proper semantics -->
+                <figure>
+                    <img src="images/Lab02-2.png"
+                         alt="ChatGPT making inferences from conversation history"
+                         class="lab-image">
+                    <figcaption>
+                        I was surprised by how much ChatGPT seemed to "know" about me,
+                        making inferences from conversation history I hadn't realized I'd shared.
+                    </figcaption>
+                </figure>
+
+                <h3>What I Learned</h3>
+                <p>
+                    These experiments revealed that ChatGPT assumes users want clarity,
+                    structure, and resolution — even when uncertainty might be more
+                    appropriate. The tool tends to "smooth over" ambiguity rather than
+                    sit with it. While ChatGPT is useful for brainstorming and drafting,
+                    it may obscure uncertainty or disagreement if used uncritically.
+                </p>
+
+                <h3>Ethical Considerations</h3>
+                <p>
+                    Using AI to pick apart personal behaviors raises important ethical
+                    questions. I do not share every aspect of my life with AI, so any
+                    inferences it makes are incomplete and should not be relied on as
+                    accurate self-knowledge. There is something worth examining in the
+                    fact that a language model will produce a confident psychological
+                    portrait of a user when asked — regardless of whether it is true.
+                </p>
+            </section>
+
+
+            <!-- ----------------------------------------
+                 SECTION: Tool 2 — Canva Magic Studio
+                 ---------------------------------------- -->
+            <section>
+                <h2>Tool 2: Canva Magic Studio (Presentation &amp; Design)</h2>
+
+                <h3>What I Tried</h3>
+                <p>
+                    With Canva Magic Studio, I attempted to generate presentation slides
+                    for abstract or unconventional topics. My prompt:
+                </p>
+                <blockquote>
+                    <p>"Design a presentation for a concept that doesn't exist yet."</p>
+                </blockquote>
+
+                <!-- Screenshot 3 — Canva output -->
+                <figure>
+                    <img src="images/Lab02-3.png"
+                         alt="Canva Magic Studio output for a non-existent concept"
+                         class="lab-image">
+                    <figcaption>
+                        Canva's output for "a concept that doesn't exist yet" —
+                        visually polished, but conceptually thin.
+                    </figcaption>
+                </figure>
+
+                <h3>What Happened</h3>
+                <p>
+                    Canva Magic Studio quickly produced visually polished layouts with
+                    consistent typography and color schemes. However, the content itself
+                    lacked depth and relied on short buzzwords and guesswork. It could
+                    generate a beautiful container, but couldn't supply meaningful substance.
+                </p>
+
+                <h3>What I Learned</h3>
+                <p>
+                    Canva is best used for creating presentations and infographics when
+                    given clear, specific instructions. It lacks the ability to generate
+                    authentic new ideas without heavily detailed input. The visuals and
+                    layout were pleasing — but it is ultimately a sophisticated template
+                    engine, not a thinking machine.
+                </p>
+
+                <h3>Ethical Considerations</h3>
+                <!-- Screenshot 4 wrapped in figure -->
+                <figure>
+                    <img src="images/lab02-4.png"
+                         alt="Canva generating an unexpectedly dystopian world"
+                         class="lab-image">
+                    <figcaption>
+                        Canva generated an unexpectedly dystopian vision — I wouldn't
+                        have expected this prompt to produce something so dark.
+                    </figcaption>
+                </figure>
+                <p>
+                    Canva raises questions about authorship and originality, especially
+                    when AI-generated designs are presented as personal work. There are
+                    real implications for transparency in academic and professional
+                    contexts — particularly because Canva does not clearly indicate
+                    which content is human-created versus AI-generated.
+                </p>
+            </section>
+
+
+            <!-- ----------------------------------------
+                 SECTION: Broader Reflections
+                 ---------------------------------------- -->
+            <section>
+                <h2>Broader Reflections</h2>
+                <p>
+                    Through these experiments, I observed both the strengths and significant
+                    limitations of AI tools. ChatGPT can present surprisingly personal feedback
+                    on behaviors it has inferred — but the lack of accuracy in those responses
+                    is rarely surfaced or acknowledged. It smooths over its own uncertainty.
+                </p>
+                <p>
+                    Canva Magic Studio produced interesting visuals and an easy-to-follow
+                    presentation — but without extremely clear input, it lacked meaningful
+                    depth. Both tools, in different ways, create an illusion of intelligence
+                    that can mask how much work the <em>human</em> still needs to do.
+                </p>
+                <!-- Callout box for a key takeaway -->
+                <div class="callout">
+                    <p>
+                        The most dangerous moment with any AI tool is when the output
+                        looks finished. Fluency is not accuracy. Polish is not insight.
+                    </p>
+                </div>
+            </section>
+
+
+            <!-- ----------------------------------------
+                 SECTION: What This Demonstrates
+                 Required for the Skills Portfolio — reflection on
+                 what this lab shows about my abilities.
+                 ---------------------------------------- -->
+            <section>
+                <h2>What This Demonstrates</h2>
+                <p>
+                    Lab 2 represents my first serious engagement with the question of
+                    what AI tools actually are — not what they appear to be. Before this
+                    assignment, I used tools like ChatGPT casually, accepting their outputs
+                    at face value. This lab changed that.
+                </p>
+                <p>
+                    It built my ability to identify when a tool is prioritizing confidence
+                    over accuracy, and to ask harder questions about authorship,
+                    transparency, and the hidden assumptions baked into these systems.
+                    It also marks my first real HTML work in this course — the content you're
+                    reading was structured with semantic HTML tags and an external CSS file
+                    from the very beginning.
+                </p>
+            </section>
+
+        </main>
+        <!-- END MAIN CONTENT -->
+
+
+        <!-- -----------------------------------------------
+             SIDEBAR COLUMN
+             position: sticky so it follows the user as they scroll.
+             Styled by .sidebar-card and .skill-list in styles.css.
+             ----------------------------------------------- -->
+        <aside class="lab-sidebar">
+
+            <!-- Quick facts card -->
+            <div class="sidebar-card">
+                <h4>Lab 2 at a Glance</h4>
+                <!-- Custom gold-dash bullet list — see .skill-list in CSS -->
+                <ul class="skill-list">
+                    <li>Course: DCDA 40833</li>
+                    <li>Tools: ChatGPT, Canva</li>
+                    <li>Focus: AI evaluation &amp; ethics</li>
+                    <li>Output: HTML write-up with images</li>
+                </ul>
+            </div>
+
+            <!-- Skills developed card -->
+            <div class="sidebar-card">
+                <h4>Skills Developed</h4>
+                <ul class="skill-list">
+                    <li>Critical analysis of AI</li>
+                    <li>Ethical reasoning</li>
+                    <li>Semantic HTML markup</li>
+                    <li>CSS stylesheet linking</li>
+                    <li>GitHub Pages deployment</li>
+                </ul>
+            </div>
+
+            <!-- Navigation links -->
+            <a href="index.html" class="sidebar-link">← Back to Portfolio</a>
+            <a href="lab05.html" class="sidebar-link">Next: Lab 5 →</a>
+
+        </aside>
+        <!-- END SIDEBAR -->
+
+   </div>
+    <!-- END TWO-COLUMN LAYOUT -->
+
+
+    <!-- =====================================================
+         FOOTER — same on every page
+         ===================================================== -->
     <footer>
-        <p>&copy; 2026 Mary-Michael Dial | <a href="https://github.com/mary-michaeldial/dcda-portfolio">GitHub</a></p>
+        <p>&copy; 2026 Mary-Michael Dial | DCDA 40833 | TCU</p>
+        <p style="margin-top:0.4rem;">
+            <a href="https://github.com/marymichaeldial/dcda-portfolio" target="_blank" rel="noopener">
+                GitHub Repository ↗
+            </a>
+        </p>
     </footer>
 
+
+    <!-- =====================================================
+         JAVASCRIPT
+         Hamburger toggle — adds/removes 'active' class on .nav-links
+         which CSS uses to show/hide the mobile menu.
+         ===================================================== -->
     <script>
-        document.querySelector('.hamburger').addEventListener('click', function () {
-            document.querySelector('.nav-links').classList.toggle('active');
+        // Grab the hamburger button and nav list by their class names
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks  = document.querySelector('.nav-links');
+
+        // Toggle 'active' class each time the hamburger is clicked
+        hamburger.addEventListener('click', function () {
+            navLinks.classList.toggle('active');
         });
     </script>
+
+    <!-- Scroll animation — adds 'visible' class to .reveal elements -->
+    <script src="portfolio-animations.js"></script>
+
 </body>
-</html>
+</html> 

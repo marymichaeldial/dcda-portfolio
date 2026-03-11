@@ -1,114 +1,365 @@
 <!DOCTYPE html>
+<!-- ============================================================
+     lab05.html — Lab 5: Vibe Coding
+     Author: Mary-Michael Dial | DCDA 40833 | Spring 2026
+
+     This page documents Lab 5, which had two experiments:
+       A) CSS animation redesign of the portfolio
+       B) Python bar charts using CITY Boots social media data
+
+     The page uses the same two-column layout as lab02.html:
+     main content on the left, sticky sidebar on the right.
+     ============================================================ -->
 <html lang="en">
+
 <head>
+    <!-- UTF-8 handles all special characters -->
     <meta charset="UTF-8">
+    <!-- Viewport scales the page correctly on phones -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lab 05 — Vibe Coding | DCDA Portfolio</title>
-    <link rel="stylesheet" href="css/styles.css"> 
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=Lora:ital,wght@0,400;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-    <style>
-        blockquote {
-            border-left: 3px solid var(--accent-color);
-            margin: 1.25rem 0;
-            padding: 1rem 1.5rem;
-            background-color: var(--bg-color);
-            font-family: var(--font-body);
-            font-style: italic;
-            color: var(--text-secondary);
-            border-radius: 0 4px 4px 0;
-        }
-
-        figure {
-            margin: 1.5rem 0;
-        }
-
-        figcaption {
-            font-family: var(--font-body);
-            font-style: italic;
-            font-size: 0.875rem;
-            color: var(--text-secondary);
-            margin-top: 0.75rem;
-            text-align: center;
-        }
-
-        main section a {
-            color: var(--primary-color);
-            text-decoration: none;
-            border-bottom: 1px solid var(--border-color);
-            transition: color 0.2s ease, border-color 0.2s ease;
-        }
-
-        main section a:hover {
-            color: var(--accent-color);
-            border-bottom-color: var(--accent-color);
-        }
-    </style>
+    <title>Lab 5 — Vibe Coding | Mary-Michael Dial</title>
+    <!-- Single external stylesheet — all design lives in here -->
+    <link rel="stylesheet" href="css/styles.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lora:ital,wght@0,400;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 </head>
+
 <body>
 
-    <header>
-        <h1>Mary Michael Dial</h1>
-        <p>DCDA 40833 — Skills Portfolio</p>
-    </header>
-
+    <!-- =====================================================
+         NAVIGATION BAR
+         Sticky nav — same structure on every page.
+         Hamburger toggles the menu on mobile via JS below.
+         ===================================================== -->
     <nav>
-        <ul>
+        <button class="hamburger" aria-label="Toggle menu">&#9776;</button>
+        <ul class="nav-links">
             <li><a href="index.html">Home</a></li>
-            <li><a href="#experiment-a">Experiment A</a></li>
-            <li><a href="#experiment-b">Experiment B</a></li>
-            <li><a href="#prompts">AI Prompts</a></li>
-            <li><a href="#reflection">Reflection</a></li>
+            <li><a href="lab02.html">Lab 2</a></li>
+            <li><a href="lab03.html">Lab 3</a></li>
+            <li><a href="lab04.html">Lab 4</a></li>
+            <li><a href="lab05.html" class="active">Lab 5</a></li>
+            <li><a href="lab06.html">Lab 6</a></li>
         </ul>
     </nav>
 
-    <main>
+    <!-- =====================================================
+         LAB HERO BANNER
+         Dark navy section with breadcrumb, title, metadata.
+         .lab-hero styles are in css/styles.css.
+         Gold line at the bottom is added by CSS ::after.
+         ===================================================== -->
+    <div class="lab-hero">
+        <div style="max-width:960px; margin:0 auto; padding:0 1rem;">
 
-        <section id="experiment-a">
-            <h2>Experiment A — CSS Animations & Editorial Redesign</h2>
-            <p>I chose to first focus on Experiment A, to focus on the overall enhancement of my portfolio that reflects my style and goals. My first step was to find inspiration for the direction I wanted to go in. This included compiling fonts, photos, colors, animations, and transitions. I used a completely new color palette in my CSS, which included soft creams, navy blues, and brown. I then swapped the fonts and imported Google Fonts — Playfair Display and Lora — and a new italic serif for headings that makes my portfolio feel more professional.</p>
-            <p>Lastly, I changed the CSS animations with a page load, scroll triggered, and hover transitions. This was the most difficult and time consuming to learn how to do, but also the most impacting and rewarding. I used AI to assist me in the animations through the DOMContentLoaded section and the IntersectionObserver, which triggers the CSS transition. AI was most helpful in the IntersectionObserver. It poses a problem when the software can't understand the vision in my head for my portfolio, but that makes me strive to work harder in learning coding myself.</p>
-        
-        </section>
+            <!-- Breadcrumb: shows location in the site -->
+            <p class="breadcrumb">
+                <a href="index.html">Home</a>
+                <span>›</span>
+                Lab 05
+            </p>
 
-        <section id="experiment-b">
-            <h2>Experiment B — Python Visualization: CITY Boots</h2>
-            <p>For Experiment B I created a Python visualization in Google Colab using a fake social media engagement dataset for CITY Boots (a brand I actually interned at the summer of 2025). I used the dates June 2025 through January 2026 to reflect the time I was working there, making the data feel personal and specific rather than generic. The dataset was generated using numpy and pandas across four platforms: Instagram, TikTok, Twitter, and YouTube. I used with columns for Likes, Comments, and Shares.</p>
-            <p>The code runs in three stages — building the data with a nested loop, grouping it with groupby then drawing both charts with matplotllib. Drawing the bars was the hardest part. I couldn't figure out that writing x - width, x, and x + width was how to avoid stacking them on top of each other. AI significantly sped up this process, specifically the syntax for grouped bar charts, but I would probably better comprehend the material if I couldn't use it as an aid.</p>
+            <h1>Lab 5 — Vibe Coding:<br>CSS Animations &amp; Python Visualization</h1>
 
-            <figure>
-                <img src="CITYBoots-engagement.png"
-                     alt="CITY Boots Total Social Media Engagement grouped bar chart"
-                     style="max-width:100%; border-radius:4px; box-shadow: 0 4px 16px rgba(44,62,107,0.15);">
-                <figcaption>Chart 1 — Total engagement grouped by platform, June 2025–January 2026</figcaption>
-            </figure>
+            <!-- Metadata row below the title -->
+            <div class="lab-meta">
+                <div class="lab-meta-item">
+                    <span class="meta-label">Course</span>
+                    <span class="meta-value">DCDA 40833</span>
+                </div>
+                <div class="lab-meta-item">
+                    <span class="meta-label">Tools</span>
+                    <span class="meta-value">CSS · Python · Google Colab · Matplotlib</span>
+                </div>
+                <div class="lab-meta-item">
+                    <span class="meta-label">Skills</span>
+                    <span class="meta-value">Animations · Data Visualization · AI-assisted coding</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END LAB HERO -->
 
-            <figure>
-                <img src="CITYBoots-Monthlylikes.png"
-                     alt="CITY Boots Monthly Likes by Platform line chart"
-                     style="max-width:100%; border-radius:4px; box-shadow: 0 4px 16px rgba(44,62,107,0.15);">
-                <figcaption>Chart 2 — Monthly likes over time per platform, TikTok consistently outperforming others</figcaption>
-            </figure>
 
-        
-        </section>
+    <!-- =====================================================
+         TWO-COLUMN LAYOUT
+         CSS Grid: main content left (1fr), sidebar right (260px).
+         Collapses to one column on mobile via media query in CSS.
+         ===================================================== -->
+    <div style="max-width:960px; margin:2rem auto; padding:0 1rem; display:grid; grid-template-columns:1fr 260px; gap:3rem; align-items:start;">
 
-        <section id="reflection">
-            <h2>Critical Reflection</h2>
+        <!-- -----------------------------------------------
+             MAIN CONTENT COLUMN
+             ----------------------------------------------- -->
+        <main class="lab-main">
 
-            <h3>Process Evaluation and Ethical Considerations</h3>
-            <p>AI was most helpful for syntax I hadn't encountered before, specifically the IntersectionObserver. The JavaScript and grouped bar chart positioning in Python was also something I wasn't familiar with. Both have very specific structures that are hard to guess without prior experience. AI lacks the ability to create authentic and aesthtically specifc work that reflects my own creative vision. This poses as an ethical problem because it lacks individuality.</p>
+            <!-- ----------------------------------------
+                 SECTION: Lab Requirements
+                 Brief synopsis of what the lab asked for.
+                 ---------------------------------------- -->
+            <section>
+                <h2>Lab Requirements</h2>
+                <!-- Callout box highlights the core assignment -->
+                <div class="callout">
+                    <p>
+                        Choose two experiments from a provided menu. Experiment A focused
+                        on visual/design work — enhancing the portfolio with CSS animations,
+                        a refined color palette, and scroll-triggered transitions. Experiment B
+                        focused on data work — building a Python visualization from a real
+                        or realistic dataset using Matplotlib.
+                    </p>
+                </div>
+                <p>
+                    The "vibe coding" framing meant we were encouraged to use AI assistance
+                    and intuition to build — but also to reflect critically on where AI
+                    helped versus where it fell short.
+                </p>
+            </section>
 
-        </section>
 
-    </main>
+            <!-- ----------------------------------------
+                 SECTION: Experiment A — CSS Animations
+                 ---------------------------------------- -->
+            <section id="experiment-a">
+                <h2>Experiment A — CSS Animations &amp; Editorial Redesign</h2>
 
+                <p>
+                    I chose to focus Experiment A on the overall enhancement of my portfolio
+                    to reflect my personal style and goals. My first step was finding
+                    inspiration — compiling fonts, colors, animations, and transitions I
+                    was drawn to.
+                </p>
+                <p>
+                    I used a completely new color palette: soft creams, navy blues, and warm
+                    brown. I imported Google Fonts — <em>Playfair Display</em> and
+                    <em>Lora</em> — which gave the portfolio a more editorial, professional
+                    feel compared to the default fonts.
+                </p>
+                <p>
+                    The hardest and most rewarding part was the CSS animations: a page load
+                    fade-in, scroll-triggered reveals, and hover transitions. I used AI to
+                    help with the <code>DOMContentLoaded</code> event and the
+                    <code>IntersectionObserver</code> API, which watches for elements
+                    entering the viewport and triggers the CSS transition when they do.
+                </p>
+
+                <!-- Callout explaining IntersectionObserver for the reader -->
+                <div class="callout">
+                    <p>
+                        <strong>IntersectionObserver</strong> is a browser API that watches
+                        whether an element is visible in the viewport. When a .reveal element
+                        scrolls into view, JavaScript adds the 'visible' class — which triggers
+                        the CSS opacity and transform transition.
+                    </p>
+                </div>
+
+                <h3>What I Learned</h3>
+                <p>
+                    AI was most helpful for the specific structure of
+                    <code>IntersectionObserver</code> — syntax that's hard to guess without
+                    prior experience. The challenge was that AI couldn't understand the
+                    creative vision in my head. That gap actually motivated me to learn more
+                    of the underlying code myself rather than rely entirely on generated output.
+                </p>
+
+                <h3>What This Demonstrates</h3>
+                <p>
+                    Experiment A shows my ability to move beyond static CSS into dynamic,
+                    interactive design. The navy/cream color scheme, serif typography, and
+                    gold accents that run through this entire portfolio originated in this lab.
+                </p>
+            </section>
+
+
+            <!-- ----------------------------------------
+                 SECTION: Experiment B — Python Visualization
+                 ---------------------------------------- -->
+            <section id="experiment-b">
+                <h2>Experiment B — Python Visualization: CITY Boots</h2>
+
+                <p>
+                    For Experiment B I created a Python visualization in Google Colab using
+                    a fake social media engagement dataset for
+                    <strong>CITY Boots</strong> — a brand I actually interned at during
+                    summer 2025. I used dates from June 2025 through January 2026 to
+                    reflect the time I was working there, making the data feel personal
+                    rather than generic.
+                </p>
+                <p>
+                    The dataset was generated using <code>numpy</code> and <code>pandas</code>
+                    across four platforms — Instagram, TikTok, Twitter, and YouTube — with
+                    columns for Likes, Comments, and Shares. The code runs in three stages:
+                    building the data with a nested loop, grouping it with
+                    <code>groupby()</code>, then drawing both charts with
+                    <code>matplotlib</code>.
+                </p>
+                <p>
+                    Drawing the grouped bars was the hardest part. I couldn't figure out that
+                    writing <code>x - width</code>, <code>x</code>, and
+                    <code>x + width</code> was how to avoid stacking them on top of each
+                    other. AI significantly sped up this process, but I would probably
+                    comprehend the material more deeply without it as an immediate fallback.
+                </p>
+
+                <!-- Chart 1 — images live in the images/ subfolder -->
+                <!-- The src path was fixed from the original: added images/ prefix -->
+                <figure>
+                    <img src="images/CITYBoots-engagement.png"
+                         alt="CITY Boots Total Social Media Engagement grouped bar chart"
+                         class="lab-image">
+                    <figcaption>
+                        Chart 1 — Total engagement grouped by platform, June 2025–January 2026.
+                        TikTok led across all metrics.
+                    </figcaption>
+                </figure>
+
+                <!-- Chart 2 — monthly likes line chart -->
+                <figure>
+                    <img src="images/CITYBoots-Monthlylikes.png"
+                         alt="CITY Boots Monthly Likes by Platform line chart"
+                         class="lab-image">
+                    <figcaption>
+                        Chart 2 — Monthly likes over time per platform.
+                        TikTok consistently outperformed the other channels.
+                    </figcaption>
+                </figure>
+
+                <h3>What I Learned</h3>
+                <p>
+                    Building this chart forced me to understand how Python structures data
+                    for visualization — using <code>groupby()</code> to aggregate rows, and
+                    how matplotlib needs explicit x-position offsets to draw side-by-side
+                    bars. Using real internship data made the process more meaningful than
+                    a textbook example would have.
+                </p>
+            </section>
+
+
+            <!-- ----------------------------------------
+                 SECTION: Critical Reflection
+                 ---------------------------------------- -->
+            <section id="reflection">
+                <h2>Critical Reflection</h2>
+
+                <h3>Process Evaluation &amp; Ethical Considerations</h3>
+                <p>
+                    AI was most helpful for syntax I hadn't encountered before — specifically
+                    the <code>IntersectionObserver</code> JavaScript and the grouped bar chart
+                    positioning in Python. Both have very specific structures that are hard to
+                    guess without prior experience.
+                </p>
+                <p>
+                    AI lacks the ability to create aesthetically specific work that reflects
+                    a personal creative vision. This poses an ethical problem: if AI writes
+                    the harder parts of the code, what am I actually learning? I found myself
+                    in a tension between efficiency (get it working) and comprehension
+                    (understand why it works).
+                </p>
+
+                <!-- Key takeaway callout -->
+                <div class="callout">
+                    <p>
+                        The most honest thing I can say about this lab: AI helped me produce
+                        outputs I couldn't have made alone yet — but it also revealed exactly
+                        which skills I still need to build for myself.
+                    </p>
+                </div>
+            </section>
+
+
+            <!-- ----------------------------------------
+                 SECTION: What This Demonstrates
+                 Portfolio reflection — required for Skills Portfolio.
+                 ---------------------------------------- -->
+            <section>
+                <h2>What This Demonstrates</h2>
+                <p>
+                    Lab 5 is where the portfolio became something I was genuinely invested
+                    in aesthetically. The design system I built here — the color palette,
+                    the typography pairing, the scroll animations — carried forward into
+                    every page that came after it, including the one you're reading now.
+                </p>
+                <p>
+                    Experiment B connects academic work to real professional experience in
+                    a way that felt authentic. The CITY Boots dataset wasn't arbitrary —
+                    it reflected an actual period of work, which made the Python scripting
+                    feel purposeful rather than just an exercise.
+                </p>
+            </section>
+
+        </main>
+        <!-- END MAIN CONTENT -->
+
+
+        <!-- -----------------------------------------------
+             SIDEBAR
+             position: sticky — follows user while scrolling.
+             .sidebar-card and .skill-list styled in styles.css.
+             ----------------------------------------------- -->
+        <aside class="lab-sidebar">
+
+            <!-- Quick facts card -->
+            <div class="sidebar-card">
+                <h4>Lab 5 at a Glance</h4>
+                <ul class="skill-list">
+                    <li>Course: DCDA 40833</li>
+                    <li>Experiment A: CSS redesign</li>
+                    <li>Experiment B: Python charts</li>
+                    <li>Dataset: CITY Boots internship</li>
+                    <li>Tools: Colab, Matplotlib, CSS</li>
+                </ul>
+            </div>
+
+            <!-- Skills developed -->
+            <div class="sidebar-card">
+                <h4>Skills Developed</h4>
+                <ul class="skill-list">
+                    <li>CSS custom properties</li>
+                    <li>CSS animations &amp; transitions</li>
+                    <li>IntersectionObserver (JS)</li>
+                    <li>Python: numpy, pandas</li>
+                    <li>Matplotlib bar &amp; line charts</li>
+                    <li>Critical AI use</li>
+                </ul>
+            </div>
+
+            <!-- Navigation links between labs -->
+            <a href="lab02.html" class="sidebar-link">← Lab 2</a>
+            <a href="lab06.html" class="sidebar-link">Next: Lab 6 →</a>
+
+        </aside>
+        <!-- END SIDEBAR -->
+
+    </div>
+    <!-- END TWO-COLUMN LAYOUT -->
+
+
+    <!-- FOOTER — same on every page -->
     <footer>
-        <p>Mary Michael Dial — DCDA 40833 Skills Portfolio |
-            <a href="https://github.com/marymichaeldial/dcda-portfolio" target="_blank">GitHub</a> |
-            <a href="https://marymichaeldial.github.io/dcda-portfolio/" target="_blank">Live Site</a>
+        <p>&copy; 2026 Mary-Michael Dial | DCDA 40833 | TCU</p>
+        <p style="margin-top:0.4rem;">
+            <a href="https://github.com/marymichaeldial/dcda-portfolio" target="_blank" rel="noopener">
+                GitHub Repository ↗
+            </a>
         </p>
     </footer>
 
+
+    <!-- =====================================================
+         JAVASCRIPT — hamburger menu toggle
+         Adds/removes 'active' class on .nav-links.
+         CSS uses this class to show/hide the mobile menu.
+         ===================================================== -->
+    <script>
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks  = document.querySelector('.nav-links');
+
+        hamburger.addEventListener('click', function () {
+            navLinks.classList.toggle('active');
+        });
+    </script>
+
+    <!-- Scroll animations — adds 'visible' to .reveal elements -->
     <script src="portfolio-animations.js"></script>
 
 </body>

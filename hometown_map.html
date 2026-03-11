@@ -1,107 +1,431 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link
-      rel="apple-touch-icon"
-      sizes="180x180"
-      href="https://static-assets.mapbox.com/branding/favicon/v1/apple-touch-icon.png?v=gAd4JjrGWl"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="32x32"
-      href="https://static-assets.mapbox.com/branding/favicon/v1/favicon-32x32.png?v=gAd4JjrGWl"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="16x16"
-      href="https://static-assets.mapbox.com/branding/favicon/v1/favicon-16x16.png?v=gAd4JjrGWl"
-    />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      http-equiv="Content-Security-Policy"
-      content="
-    connect-src
-      'self'
-      data:
-      blob:
-      https://*.mapbox.com
-      https://*.mapbox.tech
-      https://*.tiles.mapbox.com
-      https://*.tilestream.net
-      https://tilestream-tilesets-staging.s3.amazonaws.com
-      https://tilestream-tilesets-production.s3.amazonaws.com
-      https://api-maps-staging.tilestream.net
-      https://dynamodb.us-east-1.amazonaws.com
-      https://cdn.segment.com
-      https://sentry.io
-      https://*.sentry.io
-      https://sentry.io
-      https://api.segment.io
-      https://*.launchdarkly.com
-      https://*.stripe.com
-      https://*.amazonaws.com
-      ws://127.0.0.1:*  
-      ws://localhost:*/rsbuild-hmr
-      http://localhost:*
-      ;
-    font-src
-      'self'
-      https://*.mapbox.com
-      https://*.tilestream.net
-      http://localhost:*
-      ;
-      
-    img-src
-      'self'
-      data:
-      blob:
-      https://*.mapbox.com
-      https://*.tilestream.net
-      https://*.tiles.mapbox.com
-      https://static-assets.mapbox.com
-      https://www.gravatar.com
-      https://i2.wp.com/static-assets.mapbox.com
-      https://*.stripe.com
-      http://localhost:*
-      ;
-      
-    script-src
-      'self'
-      'unsafe-eval'
-      'unsafe-inline'
-      https://*.mapbox.com
-      https://*.tilestream.net
-      https://cloudfront-staging.tilestream.net
-      https://cdn.segment.com
-      https://*.stripe.com
-      http://localhost:*
-      https://widget.kapa.ai
-      https://www.google.com
-      https://www.gstatic.com
-      ;
-      
-    style-src
-      'self'
-      blob:
-      'unsafe-inline'
-      https://*.mapbox.com
-      https://*.tilestream.net
-      https://*.stripe.com
-      http://localhost:*
-      ;
-      
-    worker-src 'self' blob:
-      http://localhost:*
-      ;
-    "
-    />
-    <title>Console | Mapbox</title>
-  <script defer src="/static/js/index.76ae9593.js"></script></head>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_a1f163da990c882c042dea22857321d0 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
 
-  <body>
-    <div id="root"></div>
-  </body>
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+</head>
+<body>
+    
+    
+            <div class="folium-map" id="map_a1f163da990c882c042dea22857321d0" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_a1f163da990c882c042dea22857321d0 = L.map(
+                "map_a1f163da990c882c042dea22857321d0",
+                {
+                    center: [32.3513, -95.3011],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 12,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_03d0385d8793440e456bce102fe1af08 = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_03d0385d8793440e456bce102fe1af08.addTo(map_a1f163da990c882c042dea22857321d0);
+        
+    
+            var circle_marker_0f7159aabb6b1706b8f4caae6b0c8514 = L.circleMarker(
+                [32.3432, -95.2943],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9, "stroke": true, "weight": 2}
+            ).addTo(map_a1f163da990c882c042dea22857321d0);
+        
+    
+        var popup_ef8b3b41886b69d323746e739ba15d2e = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_f4e0363fb4f1c3975c0903096697dcd8 = $(`<div id="html_f4e0363fb4f1c3975c0903096697dcd8" style="width: 100.0%; height: 100.0%;"><div style='font-family:Georgia,serif;max-width:200px;'><strong style='color:#2c3e6b;'>Stanley's Famous Pit Barbecue</strong><br><em style='font-size:0.8rem;color:#888;'>Restaurant</em><br><br><span style='font-size:0.85rem;'>A Tyler institution since 1958.</span></div></div>`)[0];
+                popup_ef8b3b41886b69d323746e739ba15d2e.setContent(html_f4e0363fb4f1c3975c0903096697dcd8);
+            
+        
+
+        circle_marker_0f7159aabb6b1706b8f4caae6b0c8514.bindPopup(popup_ef8b3b41886b69d323746e739ba15d2e)
+        ;
+
+        
+    
+    
+            circle_marker_0f7159aabb6b1706b8f4caae6b0c8514.bindTooltip(
+                `<div>
+                     Stanley's Famous Pit Barbecue
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_e021a649f89dc7d480938d04502448e6 = L.circleMarker(
+                [32.3519, -95.3102],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "purple", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9, "stroke": true, "weight": 2}
+            ).addTo(map_a1f163da990c882c042dea22857321d0);
+        
+    
+        var popup_8f1c5fe30b147447af54b30376ac2f6b = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_8d9d6e349ed3714503ea98d4d26556b1 = $(`<div id="html_8d9d6e349ed3714503ea98d4d26556b1" style="width: 100.0%; height: 100.0%;"><div style='font-family:Georgia,serif;max-width:200px;'><strong style='color:#2c3e6b;'>Tyler Rose Garden</strong><br><em style='font-size:0.8rem;color:#888;'>Cultural</em><br><br><span style='font-size:0.85rem;'>The largest rose garden in the US.</span></div></div>`)[0];
+                popup_8f1c5fe30b147447af54b30376ac2f6b.setContent(html_8d9d6e349ed3714503ea98d4d26556b1);
+            
+        
+
+        circle_marker_e021a649f89dc7d480938d04502448e6.bindPopup(popup_8f1c5fe30b147447af54b30376ac2f6b)
+        ;
+
+        
+    
+    
+            circle_marker_e021a649f89dc7d480938d04502448e6.bindTooltip(
+                `<div>
+                     Tyler Rose Garden
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_de93f42482afca64f5347948492d199a = L.circleMarker(
+                [32.3681, -95.3189],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9, "stroke": true, "weight": 2}
+            ).addTo(map_a1f163da990c882c042dea22857321d0);
+        
+    
+        var popup_c98d61780838173661c516a860d3b446 = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_77863fd516c5e2762f717a4fb6c9a07d = $(`<div id="html_77863fd516c5e2762f717a4fb6c9a07d" style="width: 100.0%; height: 100.0%;"><div style='font-family:Georgia,serif;max-width:200px;'><strong style='color:#2c3e6b;'>Caldwell Zoo</strong><br><em style='font-size:0.8rem;color:#888;'>Recreation</em><br><br><span style='font-size:0.85rem;'>One of the best small-city zoos in the country.</span></div></div>`)[0];
+                popup_c98d61780838173661c516a860d3b446.setContent(html_77863fd516c5e2762f717a4fb6c9a07d);
+            
+        
+
+        circle_marker_de93f42482afca64f5347948492d199a.bindPopup(popup_c98d61780838173661c516a860d3b446)
+        ;
+
+        
+    
+    
+            circle_marker_de93f42482afca64f5347948492d199a.bindTooltip(
+                `<div>
+                     Caldwell Zoo
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_040906dac253e4cd9872b7a2b78a6f1d = L.circleMarker(
+                [32.4617, -95.2697],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9, "stroke": true, "weight": 2}
+            ).addTo(map_a1f163da990c882c042dea22857321d0);
+        
+    
+        var popup_b7c8b4d862878e3dc493589215093fdc = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_f49c7c3c48197dfd73503930dedf44d1 = $(`<div id="html_f49c7c3c48197dfd73503930dedf44d1" style="width: 100.0%; height: 100.0%;"><div style='font-family:Georgia,serif;max-width:200px;'><strong style='color:#2c3e6b;'>Tyler State Park</strong><br><em style='font-size:0.8rem;color:#888;'>Park</em><br><br><span style='font-size:0.85rem;'>Thick pine forest and a spring-fed lake.</span></div></div>`)[0];
+                popup_b7c8b4d862878e3dc493589215093fdc.setContent(html_f49c7c3c48197dfd73503930dedf44d1);
+            
+        
+
+        circle_marker_040906dac253e4cd9872b7a2b78a6f1d.bindPopup(popup_b7c8b4d862878e3dc493589215093fdc)
+        ;
+
+        
+    
+    
+            circle_marker_040906dac253e4cd9872b7a2b78a6f1d.bindTooltip(
+                `<div>
+                     Tyler State Park
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_99eb3d224c6144cbd9b876f7f824324e = L.circleMarker(
+                [32.3754, -95.3301],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9, "stroke": true, "weight": 2}
+            ).addTo(map_a1f163da990c882c042dea22857321d0);
+        
+    
+        var popup_e6739dbc05832a31166ab6ce09c6f925 = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_fff6b334412c6e4b7f7743f137a65032 = $(`<div id="html_fff6b334412c6e4b7f7743f137a65032" style="width: 100.0%; height: 100.0%;"><div style='font-family:Georgia,serif;max-width:200px;'><strong style='color:#2c3e6b;'>True Vine Brewing Company</strong><br><em style='font-size:0.8rem;color:#888;'>Restaurant</em><br><br><span style='font-size:0.85rem;'>Tyler's best craft brewery.</span></div></div>`)[0];
+                popup_e6739dbc05832a31166ab6ce09c6f925.setContent(html_fff6b334412c6e4b7f7743f137a65032);
+            
+        
+
+        circle_marker_99eb3d224c6144cbd9b876f7f824324e.bindPopup(popup_e6739dbc05832a31166ab6ce09c6f925)
+        ;
+
+        
+    
+    
+            circle_marker_99eb3d224c6144cbd9b876f7f824324e.bindTooltip(
+                `<div>
+                     True Vine Brewing Company
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_6d8b4d86cda12a66c05df02bc62c5a72 = L.circleMarker(
+                [32.3198, -95.3354],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9, "stroke": true, "weight": 2}
+            ).addTo(map_a1f163da990c882c042dea22857321d0);
+        
+    
+        var popup_df9dc49f04cbaf5dbafcbe37109fde0e = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_82790dd37c4cd77038b972af866d5f99 = $(`<div id="html_82790dd37c4cd77038b972af866d5f99" style="width: 100.0%; height: 100.0%;"><div style='font-family:Georgia,serif;max-width:200px;'><strong style='color:#2c3e6b;'>The Grove Kitchen & Gardens</strong><br><em style='font-size:0.8rem;color:#888;'>Restaurant</em><br><br><span style='font-size:0.85rem;'>Farm-to-table dining on a garden patio.</span></div></div>`)[0];
+                popup_df9dc49f04cbaf5dbafcbe37109fde0e.setContent(html_82790dd37c4cd77038b972af866d5f99);
+            
+        
+
+        circle_marker_6d8b4d86cda12a66c05df02bc62c5a72.bindPopup(popup_df9dc49f04cbaf5dbafcbe37109fde0e)
+        ;
+
+        
+    
+    
+            circle_marker_6d8b4d86cda12a66c05df02bc62c5a72.bindTooltip(
+                `<div>
+                     The Grove Kitchen & Gardens
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_fae6dfbbe0dcf8fd8b08343db1f04879 = L.circleMarker(
+                [32.3541, -95.2972],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "darkred", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9, "stroke": true, "weight": 2}
+            ).addTo(map_a1f163da990c882c042dea22857321d0);
+        
+    
+        var popup_dfe1331adc282177353da063965ea67f = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_7e03c75ad1c7a0fd9cbfb7df1e11eb2d = $(`<div id="html_7e03c75ad1c7a0fd9cbfb7df1e11eb2d" style="width: 100.0%; height: 100.0%;"><div style='font-family:Georgia,serif;max-width:200px;'><strong style='color:#2c3e6b;'>Goodman-LeGrand House</strong><br><em style='font-size:0.8rem;color:#888;'>Historical</em><br><br><span style='font-size:0.85rem;'>A preserved 1859 antebellum home.</span></div></div>`)[0];
+                popup_dfe1331adc282177353da063965ea67f.setContent(html_7e03c75ad1c7a0fd9cbfb7df1e11eb2d);
+            
+        
+
+        circle_marker_fae6dfbbe0dcf8fd8b08343db1f04879.bindPopup(popup_dfe1331adc282177353da063965ea67f)
+        ;
+
+        
+    
+    
+            circle_marker_fae6dfbbe0dcf8fd8b08343db1f04879.bindTooltip(
+                `<div>
+                     Goodman-LeGrand House
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_099b60801901601b16c9bd6ef9fc6348 = L.circleMarker(
+                [32.3293, -95.2625],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9, "stroke": true, "weight": 2}
+            ).addTo(map_a1f163da990c882c042dea22857321d0);
+        
+    
+        var popup_b70e7872b59369c9d5a443605d325a3b = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_5cceb2af0425b88ab757822bb95f6df8 = $(`<div id="html_5cceb2af0425b88ab757822bb95f6df8" style="width: 100.0%; height: 100.0%;"><div style='font-family:Georgia,serif;max-width:200px;'><strong style='color:#2c3e6b;'>University of Texas at Tyler</strong><br><em style='font-size:0.8rem;color:#888;'>School</em><br><br><span style='font-size:0.85rem;'>UT Tyler's wooded campus.</span></div></div>`)[0];
+                popup_b70e7872b59369c9d5a443605d325a3b.setContent(html_5cceb2af0425b88ab757822bb95f6df8);
+            
+        
+
+        circle_marker_099b60801901601b16c9bd6ef9fc6348.bindPopup(popup_b70e7872b59369c9d5a443605d325a3b)
+        ;
+
+        
+    
+    
+            circle_marker_099b60801901601b16c9bd6ef9fc6348.bindTooltip(
+                `<div>
+                     University of Texas at Tyler
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_c75cb158ad0c6e78ad287e4ce0ab8934 = L.circleMarker(
+                [32.3387, -95.3012],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9, "stroke": true, "weight": 2}
+            ).addTo(map_a1f163da990c882c042dea22857321d0);
+        
+    
+        var popup_aa2607e8123811b8700e8fdbf9dd2590 = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_97d38c55273dbfe577abacaed29ea20b = $(`<div id="html_97d38c55273dbfe577abacaed29ea20b" style="width: 100.0%; height: 100.0%;"><div style='font-family:Georgia,serif;max-width:200px;'><strong style='color:#2c3e6b;'>Rose Rudman Trail</strong><br><em style='font-size:0.8rem;color:#888;'>Park</em><br><br><span style='font-size:0.85rem;'>A beloved trail through pine forest.</span></div></div>`)[0];
+                popup_aa2607e8123811b8700e8fdbf9dd2590.setContent(html_97d38c55273dbfe577abacaed29ea20b);
+            
+        
+
+        circle_marker_c75cb158ad0c6e78ad287e4ce0ab8934.bindPopup(popup_aa2607e8123811b8700e8fdbf9dd2590)
+        ;
+
+        
+    
+    
+            circle_marker_c75cb158ad0c6e78ad287e4ce0ab8934.bindTooltip(
+                `<div>
+                     Rose Rudman Trail
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_6fb2221ebbebda059cbeb9fc846d3f8e = L.circleMarker(
+                [32.4198, -95.2341],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "purple", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9, "stroke": true, "weight": 2}
+            ).addTo(map_a1f163da990c882c042dea22857321d0);
+        
+    
+        var popup_75719d9f2acc8335487b632180089d39 = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_015b183d19ff96260a43176c86e52d91 = $(`<div id="html_015b183d19ff96260a43176c86e52d91" style="width: 100.0%; height: 100.0%;"><div style='font-family:Georgia,serif;max-width:200px;'><strong style='color:#2c3e6b;'>Tiger Creek Wildlife Refuge</strong><br><em style='font-size:0.8rem;color:#888;'>Cultural</em><br><br><span style='font-size:0.85rem;'>A sanctuary for rescued big cats.</span></div></div>`)[0];
+                popup_75719d9f2acc8335487b632180089d39.setContent(html_015b183d19ff96260a43176c86e52d91);
+            
+        
+
+        circle_marker_6fb2221ebbebda059cbeb9fc846d3f8e.bindPopup(popup_75719d9f2acc8335487b632180089d39)
+        ;
+
+        
+    
+    
+            circle_marker_6fb2221ebbebda059cbeb9fc846d3f8e.bindTooltip(
+                `<div>
+                     Tiger Creek Wildlife Refuge
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+</script>
 </html>

@@ -1,157 +1,480 @@
 <!DOCTYPE html>
+<!-- ============================================================
+     lab06.html — Lab 6: Interactive Mapping
+     Author: Mary-Michael Dial | DCDA 40833 | Spring 2026
+
+     This page documents Lab 6, which involved:
+       1. Designing a custom Mapbox basemap in Mapbox Studio
+          inspired by Sturgill Simpson's A Sailor's Guide to Earth
+       2. Building a CSV of 10 Tyler, TX locations
+       3. Generating an interactive Folium map with Python
+       4. Embedding the map in the portfolio via iframe
+     ============================================================ -->
 <html lang="en">
+
 <head>
+    <!-- UTF-8 handles all special characters -->
     <meta charset="UTF-8">
+    <!-- Viewport scales correctly on phones -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lab 06 — Python Mapping | DCDA Portfolio</title>
+    <title>Lab 6 — Interactive Mapping | Mary-Michael Dial</title>
+    <!-- Single external stylesheet — all design lives here -->
     <link rel="stylesheet" href="css/styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=Lora:ital,wght@0,400;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lora:ital,wght@0,400;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
     <style>
+        /* --------------------------------------------------
+           Page-specific styles for lab06.html only.
+           Kept here rather than in styles.css because they
+           are only needed on this one page.
+           -------------------------------------------------- */
+
+        /* iframe container for the embedded Folium map */
         .map-embed {
             width: 100%;
-            height: 550px;
+            height: 520px;
             border: none;
-            border-radius: 6px;
-            box-shadow: 0 4px 16px rgba(44,62,107,0.15);
+            border-radius: 4px;
+            /* Warm shadow matches the portfolio's brown palette */
+            box-shadow: 0 4px 16px rgba(44, 62, 107, 0.15);
             margin: 1.5rem 0;
         }
 
-        figure {
-            margin: 1.5rem 0;
-        }
-
-        figcaption {
-            font-family: var(--font-body);
-            font-style: italic;
-            font-size: 0.875rem;
-            color: var(--text-secondary);
-            margin-top: 0.75rem;
-            text-align: center;
-        }
-
-        main section a {
-            color: var(--primary-color);
-            text-decoration: none;
-            border-bottom: 1px solid var(--border-color);
-            transition: color 0.2s ease, border-color 0.2s ease;
-        }
-
-        main section a:hover {
-            color: var(--accent-color);
-            border-bottom-color: var(--accent-color);
-        }
-
+        /* Color palette swatch row */
         .palette {
             display: flex;
             gap: 0.75rem;
             flex-wrap: wrap;
-            margin: 1rem 0;
+            margin: 1.25rem 0;
         }
 
+        /* Individual color swatch — circle + hex label */
         .swatch {
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 0.4rem;
-            font-family: var(--font-body);
-            font-size: 0.75rem;
-            color: var(--text-secondary);
+            font-family: var(--font-ui);
+            font-size: 0.72rem;
+            color: var(--text-mid);
         }
 
+        /* The colored circle itself */
         .swatch-color {
-            width: 48px;
-            height: 48px;
+            width: 44px;
+            height: 44px;
             border-radius: 50%;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Step-by-step process list */
+        .process-steps {
+            list-style: none;
+            counter-reset: step-counter;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin: 1rem 0 1.5rem;
+        }
+
+        /* Each step increments the CSS counter */
+        .process-steps li {
+            counter-increment: step-counter;
+            padding: 1rem 1rem 1rem 3.5rem;
+            background: var(--cream-dark);
+            border-radius: 4px;
+            border-left: 3px solid var(--brown);
+            position: relative;
+        }
+
+        /* The step number — drawn from the CSS counter, not HTML */
+        .process-steps li::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 1.3rem;
+            color: var(--brown);
+            opacity: 0.4;
+        }
+
+        .process-steps li strong {
+            display: block;
+            font-family: var(--font-ui);
+            font-size: 0.82rem;
+            font-weight: 500;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: var(--navy);
+            margin-bottom: 3px;
+        }
+
+        .process-steps li p {
+            margin: 0;
+            font-size: 0.88rem;
         }
     </style>
 </head>
+
 <body>
 
-    <header>
-        <h1>Mary Michael Dial</h1>
-        <p>DCDA 40833 — Skills Portfolio</p>
-    </header>
-
+    <!-- =====================================================
+         NAVIGATION BAR
+         Sticky — stays at top while scrolling.
+         Same structure on every page.
+         ===================================================== -->
     <nav>
-        <ul>
+        <button class="hamburger" aria-label="Toggle menu">&#9776;</button>
+        <ul class="nav-links">
             <li><a href="index.html">Home</a></li>
-            <li><a href="#basemap">Custom Basemap</a></li>
-            <li><a href="#map">Interactive Map</a></li>
-            <li><a href="#reflection">Reflection</a></li>
+            <li><a href="lab02.html">Lab 2</a></li>
+            <li><a href="lab03.html">Lab 3</a></li>
+            <li><a href="lab04.html">Lab 4</a></li>
+            <li><a href="lab05.html">Lab 5</a></li>
+            <li><a href="lab06.html" class="active">Lab 6</a></li>
         </ul>
     </nav>
 
-    <main>
+    <!-- =====================================================
+         LAB HERO BANNER
+         Dark navy section with breadcrumb, title, metadata.
+         .lab-hero is styled in css/styles.css.
+         Gold line at bottom added by CSS ::after.
+         ===================================================== -->
+    <div class="lab-hero">
+        <div style="max-width:960px; margin:0 auto; padding:0 1rem;">
 
-        <section id="basemap">
-            <h2>Part 1 — Custom Mapbox Basemap</h2>
-            <p>My basemap design was inspired by the album artwork of Sturgill Simpson's <em>A Sailor's Guide to Earth</em>. The cover features deep navy ocean tones, warm golden horizons, and an aged, nautical aesthetic that felt naturally suited to a map. I translated these visual elements into a color palette centered on dark navy water (<code>#0D1B2A</code>), aged parchment land (<code>#E8D5A3</code>), and warm cream roads.</p>
+            <!-- Breadcrumb shows location in the site -->
+            <p class="breadcrumb">
+                <a href="index.html">Home</a>
+                <span>›</span>
+                Lab 06
+            </p>
 
-            <div class="palette">
-                <div class="swatch">
-                    <div class="swatch-color" style="background:#0D1B2A;"></div>
-                    <span>#0D1B2A</span>
+            <h1>Lab 6 — Interactive Mapping<br>with Mapbox &amp; Python</h1>
+
+            <!-- Metadata row -->
+            <div class="lab-meta">
+                <div class="lab-meta-item">
+                    <span class="meta-label">Course</span>
+                    <span class="meta-value">DCDA 40833</span>
                 </div>
-                <div class="swatch">
-                    <div class="swatch-color" style="background:#1B3A5C;"></div>
-                    <span>#1B3A5C</span>
+                <div class="lab-meta-item">
+                    <span class="meta-label">Tools</span>
+                    <span class="meta-value">Mapbox Studio · Python · Folium</span>
                 </div>
-                <div class="swatch">
-                    <div class="swatch-color" style="background:#E8D5A3;"></div>
-                    <span>#E8D5A3</span>
-                </div>
-                <div class="swatch">
-                    <div class="swatch-color" style="background:#D4B97A;"></div>
-                    <span>#D4B97A</span>
-                </div>
-                <div class="swatch">
-                    <div class="swatch-color" style="background:#C49A3C;"></div>
-                    <span>#C49A3C</span>
-                </div>
-                <div class="swatch">
-                    <div class="swatch-color" style="background:#7A9E7E;"></div>
-                    <span>#7A9E7E</span>
+                <div class="lab-meta-item">
+                    <span class="meta-label">Location</span>
+                    <span class="meta-value">Tyler, Texas (10 sites)</span>
                 </div>
             </div>
+        </div>
+    </div>
+    <!-- END LAB HERO -->
 
-            <p>Style URL: <code>mapbox://styles/marymichaeldial/cmmdto2ne001r01qv65ieb89o</code></p>
-        </section>
 
-        <section id="map">
-            <h2>Part 2 — Interactive Hometown Map</h2>
-            <p>The map below was generated using Python (Folium) and displays 10 personally meaningful locations in Tyler, Texas. Each marker is color-coded by location type — restaurants in red, parks in green, cultural sites in purple, and so on. Click any marker to see a description and image of the location.</p>
+    <!-- =====================================================
+         TWO-COLUMN LAYOUT
+         CSS Grid: main content left (1fr), sidebar right (260px).
+         Collapses to one column on mobile via media query.
+         ===================================================== -->
+    <div style="max-width:960px; margin:2rem auto; padding:0 1rem; display:grid; grid-template-columns:1fr 260px; gap:3rem; align-items:start;">
 
-            <figure>
-                <iframe class="map-embed" src="hometown_map.html" title="Interactive Hometown Map of Tyler, TX"></iframe>
-                <figcaption>Interactive map of Tyler, TX — 10 locations symbolized by category using a custom Mapbox basemap</figcaption>
-            </figure>
-        </section>
+        <!-- -----------------------------------------------
+             MAIN CONTENT COLUMN
+             ----------------------------------------------- -->
+        <main class="lab-main">
 
-        <section id="reflection">
-            <h2>Reflection</h2>
+            <!-- ----------------------------------------
+                 SECTION: Lab Requirements
+                 ---------------------------------------- -->
+            <section>
+                <h2>Lab Requirements</h2>
+                <!-- Callout box summarizes the assignment -->
+                <div class="callout">
+                    <p>
+                        Design a custom basemap style in Mapbox Studio. Build a CSV dataset
+                        of at least 10 meaningful locations. Use Python and Folium to generate
+                        an interactive HTML map from the data. Embed the map in the portfolio.
+                        Write a reflection on design choices and technical challenges.
+                    </p>
+                </div>
+                <p>
+                    This was the most technically complex lab of the semester — it combined
+                    four distinct tools and required solving real integration problems rather
+                    than following a clean step-by-step tutorial.
+                </p>
+            </section>
 
-            <h3>Design Inspiration</h3>
-            <p>I chose <em>A Sailor's Guide to Earth</em> by Sturgill Simpson as my design inspiration because the album's artwork captures something rare — a sense of vastness and intimacy at the same time. The deep navy of the ocean, the warm golden horizon, and the weathered, nautical textures all felt like they belonged on a map. I extracted the core colors directly from the cover and applied them systematically: dark water, parchment land, cream roads, and sage green for parks. The result feels cohesive and intentional rather than arbitrary.</p>
 
-            <h3>Cartographic Challenges</h3>
-            <p>The biggest challenge in Mapbox Studio was designing for multiple zoom levels. At a world scale, only the water and land colors matter — labels and roads are too small to read. As you zoom in, roads and place labels need to appear progressively. I had to think carefully about what should be visible at each level so the map didn't feel cluttered at high zoom or empty at low zoom. Hillshade was also tricky — too much opacity overwhelmed the parchment land color, so I kept it subtle.</p>
+            <!-- ----------------------------------------
+                 SECTION: How I Built It
+                 Step-by-step process documentation
+                 ---------------------------------------- -->
+            <section>
+                <h2>How I Built It</h2>
 
-            <h3>Technical Challenges</h3>
-            <p>Setting up the Python environment on a Mac was unexpectedly the hardest part — <code>pip</code> and <code>python</code> commands didn't work because the system uses <code>pip3</code> and <code>python3</code>. I also had to make sure the CSV and script were in the same folder before running. I used Claude (AI) extensively to generate the Python code, and while I didn't write it from scratch myself, I worked through it line by line to understand what each section does — reading the CSV, calling the Mapbox geocoding API, building the Folium map, and saving the HTML output.</p>
+                <!-- Numbered steps using CSS counter — no numbers in HTML needed -->
+                <ol class="process-steps">
+                    <li>
+                        <strong>Mapbox Studio — Custom Basemap</strong>
+                        <p>Designed a new map style inspired by Sturgill Simpson's
+                        <em>A Sailor's Guide to Earth</em>. Adjusted water, land, road,
+                        and label colors to match the album's nautical palette.</p>
+                    </li>
+                    <li>
+                        <strong>CSV Dataset — 10 Tyler, TX Locations</strong>
+                        <p>Built a spreadsheet with name, latitude, longitude, category,
+                        and description for 10 personally meaningful places in Tyler.
+                        Saved as <code>hometown_locations.csv</code>.</p>
+                    </li>
+                    <li>
+                        <strong>Python + Folium — Interactive HTML Map</strong>
+                        <p>Ran <code>generate_lab06.py</code> in Terminal using
+                        <code>python3</code>. The script reads the CSV with pandas,
+                        creates a Folium map centered on Tyler, and adds a color-coded
+                        marker with popup for each row.</p>
+                    </li>
+                    <li>
+                        <strong>Embed — iframe in Portfolio</strong>
+                        <p>Embedded the Folium output (<code>hometown_map.html</code>)
+                        directly in this page using an <code>&lt;iframe&gt;</code> tag.
+                        The iframe displays the fully interactive map inline.</p>
+                    </li>
+                </ol>
+            </section>
 
-        </section>
 
-    </main>
+            <!-- ----------------------------------------
+                 SECTION: Custom Basemap
+                 ---------------------------------------- -->
+            <section id="basemap">
+                <h2>Part 1 — Custom Mapbox Basemap</h2>
 
+                <p>
+                    My basemap design was inspired by the album artwork of Sturgill
+                    Simpson's <em>A Sailor's Guide to Earth</em>. The cover features
+                    deep navy ocean tones, warm golden horizons, and an aged nautical
+                    aesthetic that felt naturally suited to a map.
+                </p>
+                <p>
+                    I translated these visual elements into a color palette centered on
+                    dark navy water, aged parchment land, and warm cream roads. The result
+                    feels cohesive and intentional rather than arbitrary.
+                </p>
+
+                <!-- Color palette swatches — inline style sets each circle's color -->
+                <!-- The .palette and .swatch styles are in the <style> block above -->
+                <div class="palette">
+                    <div class="swatch">
+                        <div class="swatch-color" style="background:#0D1B2A;"></div>
+                        <span>#0D1B2A</span>
+                    </div>
+                    <div class="swatch">
+                        <div class="swatch-color" style="background:#1B3A5C;"></div>
+                        <span>#1B3A5C</span>
+                    </div>
+                    <div class="swatch">
+                        <div class="swatch-color" style="background:#E8D5A3;"></div>
+                        <span>#E8D5A3</span>
+                    </div>
+                    <div class="swatch">
+                        <div class="swatch-color" style="background:#D4B97A;"></div>
+                        <span>#D4B97A</span>
+                    </div>
+                    <div class="swatch">
+                        <div class="swatch-color" style="background:#C49A3C;"></div>
+                        <span>#C49A3C</span>
+                    </div>
+                    <div class="swatch">
+                        <div class="swatch-color" style="background:#7A9E7E;"></div>
+                        <span>#7A9E7E</span>
+                    </div>
+                </div>
+
+                <!-- Mapbox style URL for reference -->
+                <p>
+                    Style URL: <code>mapbox://styles/marymichaeldial/cmmdto2ne001r01qv65ieb89o</code>
+                </p>
+
+                <h3>Cartographic Challenges</h3>
+                <p>
+                    The biggest challenge was designing for multiple zoom levels. At world
+                    scale, only water and land colors matter — labels and roads are too small
+                    to read. As you zoom in, roads and place labels need to appear
+                    progressively. I had to think carefully about what should be visible at
+                    each zoom level so the map didn't feel cluttered zoomed in or empty
+                    zoomed out. Hillshade was also tricky — too much opacity overwhelmed
+                    the parchment land color, so I kept it very subtle.
+                </p>
+            </section>
+
+
+            <!-- ----------------------------------------
+                 SECTION: Interactive Map Embed
+                 The iframe loads hometown_map.html which was
+                 generated by generate_lab06.py using Folium.
+                 ---------------------------------------- -->
+            <section id="map">
+                <h2>Part 2 — Interactive Hometown Map</h2>
+
+                <p>
+                    The map below was generated using Python and Folium. It displays
+                    10 personally meaningful locations in Tyler, Texas. Each marker is
+                    color-coded by location type — click any marker to see a description.
+                </p>
+
+                <!-- iframe embeds the Folium-generated HTML map inline -->
+                <!-- hometown_map.html lives in the root of the portfolio folder -->
+                <!-- height is set in the .map-embed style above (520px) -->
+                <figure>
+                    <iframe
+                        class="map-embed"
+                        src="hometown_map.html"
+                        title="Interactive Hometown Map of Tyler, TX">
+                    </iframe>
+                    <figcaption>
+                        Interactive map of Tyler, TX — 10 locations symbolized by category
+                        using a custom Mapbox basemap. Click any marker to read more.
+                    </figcaption>
+                </figure>
+            </section>
+
+
+            <!-- ----------------------------------------
+                 SECTION: Reflection
+                 ---------------------------------------- -->
+            <section id="reflection">
+                <h2>Reflection</h2>
+
+                <h3>Design Inspiration</h3>
+                <p>
+                    I chose <em>A Sailor's Guide to Earth</em> by Sturgill Simpson as my
+                    design inspiration because the album's artwork captures something rare —
+                    vastness and intimacy at the same time. The deep navy ocean, warm golden
+                    horizon, and weathered nautical textures all felt like they belonged on
+                    a map. I extracted the core colors directly from the cover and applied
+                    them systematically across water, land, roads, and parks.
+                </p>
+
+                <h3>Technical Challenges</h3>
+                <p>
+                    Setting up the Python environment on a Mac was unexpectedly the hardest
+                    part — <code>pip</code> and <code>python</code> commands didn't work
+                    because macOS uses <code>pip3</code> and <code>python3</code>. I also
+                    had to make sure the CSV and script were in the same folder before
+                    running. I used AI extensively to generate the Python code, but worked
+                    through it line by line to understand what each section does — reading
+                    the CSV, building the Folium map, and saving the HTML output.
+                </p>
+
+                <!-- Key takeaway callout -->
+                <div class="callout">
+                    <p>
+                        The most important lesson of this lab wasn't about mapping — it was
+                        about debugging. Every error had a solution; finding it required
+                        reading the error message carefully and testing one change at a time.
+                    </p>
+                </div>
+            </section>
+
+
+            <!-- ----------------------------------------
+                 SECTION: What This Demonstrates
+                 Portfolio reflection — required for Skills Portfolio
+                 ---------------------------------------- -->
+            <section>
+                <h2>What This Demonstrates</h2>
+                <p>
+                    Lab 6 is the most technically complex work in this portfolio. It combines
+                    four distinct tools and required me to solve real integration problems.
+                    The Tyler, TX dataset is personal — these are places that matter to me,
+                    and choosing my hometown as the subject of the first real map I ever made
+                    felt right.
+                </p>
+                <p>
+                    Building this lab also pushed my HTML skills further than any previous
+                    assignment. Embedding a live interactive map into a portfolio page —
+                    and making it look like it belongs there — required understanding how
+                    CSS, JavaScript, and HTML work together at a level I didn't have before.
+                </p>
+            </section>
+
+        </main>
+        <!-- END MAIN CONTENT -->
+
+
+        <!-- -----------------------------------------------
+             SIDEBAR
+             position: sticky — follows user while scrolling.
+             ------------------------------------------------ -->
+        <aside class="lab-sidebar">
+
+            <div class="sidebar-card">
+                <h4>Lab 6 at a Glance</h4>
+                <!-- .skill-list uses gold dash bullets from CSS -->
+                <ul class="skill-list">
+                    <li>Course: DCDA 40833</li>
+                    <li>Map: Tyler, TX</li>
+                    <li>10 personal locations</li>
+                    <li>Basemap: Mapbox Studio</li>
+                    <li>Script: Python + Folium</li>
+                </ul>
+            </div>
+
+            <div class="sidebar-card">
+                <h4>Skills Developed</h4>
+                <ul class="skill-list">
+                    <li>Mapbox Studio design</li>
+                    <li>CSV data building</li>
+                    <li>Python scripting</li>
+                    <li>Folium map generation</li>
+                    <li>Terminal navigation</li>
+                    <li>iframe embedding</li>
+                </ul>
+            </div>
+
+            <!-- Navigation between labs -->
+            <a href="lab05.html" class="sidebar-link">← Lab 5</a>
+            <a href="index.html" class="sidebar-link">Back to Portfolio</a>
+
+        </aside>
+        <!-- END SIDEBAR -->
+
+    </div>
+    <!-- END TWO-COLUMN LAYOUT -->
+
+
+    <!-- FOOTER — same on every page -->
     <footer>
-        <p>Mary Michael Dial — DCDA 40833 Skills Portfolio |
-            <a href="https://github.com/marymichaeldial/dcda-portfolio" target="_blank">GitHub</a> |
-            <a href="https://marymichaeldial.github.io/dcda-portfolio/" target="_blank">Live Site</a>
+        <p>&copy; 2026 Mary-Michael Dial | DCDA 40833 | TCU</p>
+        <p style="margin-top:0.4rem;">
+            <a href="https://github.com/marymichaeldial/dcda-portfolio" target="_blank" rel="noopener">
+                GitHub Repository ↗
+            </a>
         </p>
     </footer>
+
+
+    <!-- =====================================================
+         JAVASCRIPT — hamburger menu toggle
+         ===================================================== -->
+    <script>
+        // Grab hamburger button and nav list
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks  = document.querySelector('.nav-links');
+
+        // Toggle 'active' class — CSS shows/hides the menu
+        hamburger.addEventListener('click', function () {
+            navLinks.classList.toggle('active');
+        });
+    </script>
 
     <script src="portfolio-animations.js"></script>
 
 </body>
-</html>
+</html> 

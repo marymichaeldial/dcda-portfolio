@@ -1,132 +1,170 @@
 <!DOCTYPE html>
+<!-- This is the home page of Mary-Michael Dial's DCDA Skills Portfolio.
+     It links to all six lab pages and introduces the site. -->
 <html lang="en">
-<Mary-Michael Dial>
+
+<head>
+    <!-- UTF-8 encoding handles all characters including special symbols -->
     <meta charset="UTF-8">
+    <!-- Viewport tag makes the site scale correctly on phones and tablets -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Skills Portfolio showcasing work from DCDA 40833">
-    <meta name="author" content="Your Name">
-    <title>>Mary-Michael Dial | DCDA 40833 Skills Portfolio <head> </head></title>
+    <meta name="description" content="DCDA 40833 Skills Portfolio — Mary-Michael Dial, TCU Spring 2026">
+    <title>Mary-Michael Dial | DCDA 40833 Skills Portfolio</title>
+    <!-- Link to our one external stylesheet — controls ALL visual design -->
     <link rel="stylesheet" href="css/styles.css">
+    <!-- Google Fonts: Playfair Display (headings), Lora (body), DM Sans (nav/labels) -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 </head>
+
 <body>
-    <!-- Navigation: Links to all portfolio pages -->
+
+    <!-- =====================================================
+         NAVIGATION BAR
+         Fixed to the top of the screen. The hamburger button
+         is hidden on desktop and shown on mobile via CSS.
+         JavaScript at the bottom toggles the menu open/closed.
+         ===================================================== -->
     <nav>
+        <!-- Hamburger: three lines that become an X on mobile -->
         <button class="hamburger" aria-label="Toggle menu">&#9776;</button>
+        <!-- Nav links — collapse on mobile when hamburger is clicked -->
         <ul class="nav-links">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="ai-evaluation.html">AI Evaluation</a></li>
-            <li><a href="tufte-critique.html">Tufte Critique</a></li>
-            <li><a href="tableau-visualization.html">Tableau Viz</a></li>
-            <li><a href="lab5.html">Lab 5</a></li>
-            <li><a href="hometown-map.html">Hometown Map</a></li>
-            <a href="lab02.html">Lab 2: AI Experimentation</a>
+            <li><a href="index.html" class="active">Home</a></li>
+            <li><a href="lab02.html">Lab 2</a></li>
+            <li><a href="lab03.html">Lab 3</a></li>
+            <li><a href="lab04.html">Lab 4</a></li>
+            <li><a href="lab05.html">Lab 5</a></li>
+            <li><a href="lab06.html">Lab 6</a></li>
         </ul>
     </nav>
 
-    <!-- Header: Your name and course info -->
+    <!-- =====================================================
+         HEADER / HERO BANNER
+         Large dark section at the top — introduces name and course.
+         ===================================================== -->
     <header>
-        <h1>Mary-Michael Dial</h1>
-        <p>DCDA 40833 Skills Portfolio | Spring 2026</p>
+        <div class="header-inner">
+            <!-- Small uppercase label above the main title -->
+            <p class="header-eyebrow">TCU · DCDA 40833 · Spring 2026</p>
+            <h1>Mary-Michael Dial</h1>
+            <p class="header-sub">Digital Culture &amp; Data Analytics — Skills Portfolio</p>
+        </div>
     </header>
 
+    <!-- =====================================================
+         MAIN CONTENT
+         ===================================================== -->
     <main>
-        <!-- Welcome Section: Brief introduction to your portfolio -->
-        <section id="welcome">
-            <h2>Welcome</h2>
-            <!-- TODO: Write a brief introduction (2-3 sentences) about your portfolio -->
-            <p>Welcome to my Skills Portfolio for DCDA 40833. This site aims to accurately showcase my personal strengths and skills.</p>
-            <p>Each page represents a small part of my journey in my academic career.</p>
-        </section>
 
-        <!--I'm looking forward to curating an cool introduction to show my creative side. -->
+        <!-- -----------------------------------------------
+             ABOUT SECTION
+             Brief personal introduction with photo.
+             ----------------------------------------------- -->
         <section id="about">
-            <h2>About Me</h2>
-            <!-- TODO: Replace this placeholder content with information about yourself -->
-            <p><strong>Who I am:</strong> My name is Mary-Michael Dial. I am currently a senior, graduating in the fall of 2026. I am majoring in Digital Culture Data Analytics and minoring in Business. </p>
-            <p><strong>My interests:</strong> I love spending time outdoors and being active. I like to hunt, surf, and run, but I also enjoy slower activites like reading. I enjoy the organization and technological insight DCDA provides. </p>
-            <p><strong>What I hope to learn:</strong> I hope I can accurately curate a portfolio that reflects my interests and strenghts.</p>
+            <div class="about-grid">
 
-           
-        
-            <figure class="viz-container">
-                <img src="images/mypic.png" alt="Photo of Mary-Michael Dial">
-            </figure>
-            
+                <!-- Left column: text introduction -->
+                <div class="about-text">
+                    <h2>About Me</h2>
+                    <p>
+                        My name is Mary-Michael Dial. I'm a senior at TCU, graduating fall 2026,
+                        majoring in Digital Culture &amp; Data Analytics with a minor in Business.
+                        I grew up in Tyler, Texas — East Texas "Pine Curtain" country — and that
+                        sense of place runs through a lot of the work I've done this semester.
+                    </p>
+                    <p>
+                        I love spending time outdoors — hunting, surfing, and running — but also
+                        slower things like reading. I came into this course as a genuine beginner
+                        in both coding and data analysis. This portfolio is an honest record of
+                        that learning curve.
+                    </p>
+                </div>
+
+                <!-- Right column: photo -->
+                <div class="about-photo">
+                    <!-- Photo saved in images/ folder as mypic.png -->
+                    <img src="images/mypic.png" alt="Photo of Mary-Michael Dial">
+                </div>
+
+            </div>
         </section>
 
-        <!-- Portfolio Section: Links to all lab pages -->
-         <!-- portfolios are very important for the area I want to purse. looking forward to building it. -->
+        <!-- -----------------------------------------------
+             LAB CARDS GRID
+             One card per lab. Each card links to its detail
+             page and shows a brief description and skill tags.
+             ----------------------------------------------- -->
         <section id="portfolio">
-            <h2>My Work</h2>
-            <p>Click on any card below to view that lab assignment. Focus of actual labs may change over the course of the semester:</p>
+            <h2 class="section-title">My Work</h2>
+            <p class="section-sub">Six labs across one semester — click any card to read the full write-up.</p>
 
-            <!-- Portfolio Grid: Cards linking to each lab page -->
+            <!-- CSS Grid — auto-fills columns at minimum 280px wide -->
             <div class="portfolio-grid">
 
-                <!-- Lab 2: AI Tool Evaluation -->
-                <a href="ai-evaluation.html" class="portfolio-card">
-                    <h3>AI Tool Evaluation</h3>
+                <!-- LAB 2 CARD -->
+                <a href="lab02.html" class="portfolio-card">
                     <span class="lab-tag">Lab 2</span>
-                    <p>Analysis of AI tools and their capabilities, exploring how artificial intelligence is changing digital culture.</p>
+                    <h3>AI Tool Evaluation</h3>
+                    <p>Probing ChatGPT and Canva Magic Studio with unconventional prompts to test assumptions and explore ethics.</p>
+                    <span class="card-skills">Critical Analysis · AI Ethics · HTML</span>
                 </a>
 
-                <!-- Lab 3: Tufte Critique -->
-                 <!-- I have no clue what this means so I'm looking forward to learning more! -->
+                <!-- LAB 3 CARD -->
                 <a href="lab03.html" class="portfolio-card">
-                    <h3>Tufte Critique</h3>
                     <span class="lab-tag">Lab 3</span>
+                    <h3>Tufte Critique</h3>
                     <p>Critical analysis of a data visualization using Edward Tufte's principles of graphical excellence.</p>
-                    <nav>
-</nav>
+                    <span class="card-skills">Data Viz · Critical Writing · Tufte</span>
                 </a>
 
-                <!-- Lab 4: Tableau Visualization -->
-                <a href="tableau-visualization.html" class="portfolio-card">
-                    <h3>Tableau Visualization</h3>
+                <!-- LAB 4 CARD -->
+                <a href="lab04.html" class="portfolio-card">
                     <span class="lab-tag">Lab 4</span>
-                    <p>Interactive data visualization created with Tableau Public, exploring patterns in real-world data.</p>
+                    <h3>Tableau Visualization</h3>
+                    <p>Interactive data visualization built in Tableau Public, exploring patterns in a real-world dataset.</p>
+                    <span class="card-skills">Tableau · Data Storytelling</span>
                 </a>
 
-                <!-- Lab 5: TBD -->
-                <a href="lab5.html" class="portfolio-card">
-                    <h3>Lab 5</h3>
+                <!-- LAB 5 CARD -->
+                <a href="lab05.html" class="portfolio-card">
                     <span class="lab-tag">Lab 5</span>
-                    <p>Content based on Lab 5 assignment.</p>
+                    <h3>Vibe Coding</h3>
+                    <p>CSS animation redesign of the portfolio plus Python bar charts built from my CITY Boots internship data.</p>
+                    <span class="card-skills">CSS · Python · Matplotlib</span>
                 </a>
 
-                <!-- Lab 6: Hometown Map -->
-                 <!-- my hometown is very important to me so this section will be very heartflet!1-->
-                <a href="hometown-map.html" class="portfolio-card">
-                    <h3>Hometown Map</h3>
+                <!-- LAB 6 CARD -->
+                <a href="lab06.html" class="portfolio-card">
                     <span class="lab-tag">Lab 6</span>
-                    <p>Interactive Folium map showcasing meaningful locations from my hometown with personal reflections.</p>
+                    <h3>Interactive Mapping</h3>
+                    <p>Custom Mapbox basemap + Python/Folium map of meaningful Tyler, TX locations, embedded with Mapbox GL JS.</p>
+                    <span class="card-skills">Mapbox · Python · Folium · GIS</span>
                 </a>
 
             </div>
         </section>
 
-        <!-- Even though this section is optional, I will definetley be adding one. -->
+        <!-- -----------------------------------------------
+             SEMESTER REFLECTION
+             ----------------------------------------------- -->
         <section id="reflection">
-            <h2>Semester Reflection</h2>
-            <!-- TODO: After completing all labs, write a reflection on your growth -->
-            <p><strong>What I learned:</strong> [Reflect on the skills you developed across all six labs]</p>
-            <p><strong>Challenges I overcame:</strong> [What was difficult? How did you work through it?]</p>
-            <p><strong>How I grew:</strong> [How did your understanding of digital culture and data analytics evolve?]</p>
-            <p><strong>Looking ahead:</strong> [How will you apply these skills in the future?]</p>
-        </section>
-    </main>
+            <h2 class="section-title">Semester Reflection</h2>
 
-    <!-- Footer: Links and copyright -->
-    <footer>
-        <p><a href="https://github.com/marymichaeldial/dcda-portfolio">View Repository on GitHub</a></p>
-        <p>&copy; 2026 Mary-Michael Dial | DCDA 40833 | TCU</p>
-    </footer>
+            <div class="reflection-grid">
 
-    <script>
-        document.querySelector('.hamburger').addEventListener('click', function () {
-            document.querySelector('.nav-links').classList.toggle('active');
-        });
-    </script>
-</body>
-<script src="portfolio-animations.js"></script>
-</html>
+                <div class="reflection-item">
+                    <h3>What I Learned</h3>
+                    <p>
+                        I arrived in January not knowing HTML from CSS. I'm leaving with a
+                        functioning multi-page portfolio, a live interactive map, and Python
+                        charts built from real internship data. The biggest shift was learning
+                        how to debug: reading error messages and testing one change at a time.
+                    </p>
+                </div>
+
+                <div class="reflection-item">
+                    <h3>Challenges I Overcame</h3>
+                    <p>
+                        The hardest moment was Lab 6 — getting the Mapbox map to actually appear
+                        on the portfolio page. An iframe CSP conflict on GitHub Pages meant my
+                        Folium output wouldn't embed. Switching
